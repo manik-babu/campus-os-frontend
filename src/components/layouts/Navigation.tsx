@@ -9,10 +9,11 @@ export function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
 
     const navItems = [
-        { label: 'Programs', href: '#programs' },
-        { label: 'About', href: '#about' },
-        { label: 'Admissions', href: '#admissions' },
-        { label: 'Contact', href: '#contact' },
+        { label: 'Home', href: '/' },
+        { label: 'Programs', href: '/programs' },
+        { label: 'About', href: '/about' },
+        { label: 'Admissions', href: '/admission' },
+        { label: 'Contact', href: '/contact' },
     ];
 
     return (

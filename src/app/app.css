@@ -3,3 +3,19 @@
     position: absolute;
     left: 100%;
 }
+
+#about-hero-section {
+    background-image: url("../../public/uu-campus.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+
+#about-hero-section .overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

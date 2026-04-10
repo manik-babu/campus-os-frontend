@@ -1,7 +1,6 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-import { useRef } from 'react';
 import gsap from "gsap"
 import { useGSAP } from '@gsap/react';
 interface HeroProps {
@@ -12,7 +11,7 @@ interface HeroProps {
 }
 
 export function Hero({
-    title = 'Welcome to Uttara University',
+    title = "Welcome to Uttara University",
     subtitle = 'Empowering minds. Shaping futures. Building excellence through innovative education and global perspectives.',
     ctaText = 'Explore Programs',
     ctaSecondaryText = 'Learn More',
@@ -34,9 +33,9 @@ export function Hero({
             {/* Background Decorative Elements */}
             <div className="absolute inset-0 overflow-hidden">
                 {/* Radial glow - top right */}
-                <div className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-gradient-to-br from-[#0052FF]/8 to-transparent blur-3xl" />
+                <div className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-linear-to-br from-[#0052FF]/12 to-transparent blur-3xl" />
                 {/* Radial glow - bottom left */}
-                <div className="absolute -left-40 bottom-0 h-96 w-96 rounded-full bg-gradient-to-tr from-[#4D7CFF]/5 to-transparent blur-3xl" />
+                <div className="absolute -left-40 bottom-0 h-96 w-96 rounded-full bg-liner-to-tr from-[#4D7CFF]/8 to-transparent blur-3xl" />
             </div>
 
             <div className="container-landing relative z-10">
