@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/providers/theme-provider";
 import QueryClientProviders from "@/providers/queryClientProvider";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

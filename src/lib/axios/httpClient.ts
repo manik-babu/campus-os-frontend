@@ -1,78 +1,62 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IAxiosHttpGet } from '@/@types/axios';
+import { IApiResponse, IAxiosHttpGet } from '@/@types/axios';
 import { env } from '@/env';
 import axios from 'axios';
+import { cookies } from 'next/headers';
 
-const httpInstance = () => {
-    const instance = axios.create({
+const httpInstance = async () => {
+    const cookie = await cookies();
+    return axios.create({
         baseURL: env.NEXT_PUBLIC_BACKEND_URL,
         timeout: 20000,
+        withCredentials: true, // Enable cookies for cross-origin requests
         headers: {
             'Content-Type': 'application/json',
+            "Cookie": cookie.toString() // Include cookies in the request headers
         },
     });
-    return instance;
 }
 
-const httpGet = async (endpoint: string, options?: IAxiosHttpGet) => {
-    try {
-        const res = await httpInstance().get(endpoint, {
-            params: options?.params,
-            headers: options?.headers
-        });
-        return res.data;
-    } catch (error) {
-        console.log(`GET request to ${endpoint} failed:`, error);
-        throw error;
-    }
+const httpGet = async <T>(endpoint: string, options?: IAxiosHttpGet): Promise<IApiResponse<T>> => {
+    const instance = await httpInstance();
+    const res = await instance.get<IApiResponse<T>>(endpoint, {
+        params: options?.params,
+        headers: options?.headers
+    }).then((res) => res.data).catch((error) => error.response.data);
+    return res;
 }
-const httpPost = async (endpoint: string, data: unknown, options?: IAxiosHttpGet) => {
-    try {
-        const res = await httpInstance().post(endpoint, data, {
-            params: options?.params,
-            headers: options?.headers
-        });
-        return res.data;
-    } catch (error) {
-        console.log(`POST request to ${endpoint} failed:`, error);
-        throw error;
-    }
+const httpPost = async <T>(endpoint: string, data: unknown, options?: IAxiosHttpGet): Promise<IApiResponse<T>> => {
+    const instance = await httpInstance();
+    const res = await instance.post<IApiResponse<T>>(endpoint, data, {
+        params: options?.params,
+        headers: options?.headers
+    }).then((res) => res.data).catch((error) => error.response.data);
+    return res;
 }
-const httpPut = async (endpoint: string, data: unknown, options?: IAxiosHttpGet) => {
-    try {
-        const res = await httpInstance().put(endpoint, data, {
-            params: options?.params,
-            headers: options?.headers
-        });
-        return res.data;
-    } catch (error) {
-        console.log(`PUT request to ${endpoint} failed:`, error);
-        throw error;
-    }
+const httpPut = async <T>(endpoint: string, data: unknown, options?: IAxiosHttpGet): Promise<IApiResponse<T>> => {
+    const instance = await httpInstance();
+    const res = await instance.put<IApiResponse<T>>(endpoint, data, {
+        params: options?.params,
+        headers: options?.headers
+    }).then((res) => res.data).catch((error) => error.response.data);
+    return res;
 }
-const httpDelete = async (endpoint: string, options?: IAxiosHttpGet) => {
-    try {
-        const res = await httpInstance().delete(endpoint, {
-            params: options?.params,
-            headers: options?.headers
-        });
-        return res.data;
-    } catch (error) {
-        console.log(`DELETE request to ${endpoint} failed:`, error);
-        throw error;
-    }
+const httpDelete = async <T>(endpoint: string, options?: IAxiosHttpGet): Promise<IApiResponse<T>> => {
+    const instance = await httpInstance();
+    const res = await instance.delete<IApiResponse<T>>(endpoint, {
+        params: options?.params,
+        headers: options?.headers
+    }).then((res) => res.data).catch((error) => error.response.data);
+    return res;
 }
-const httpPatch = async (endpoint: string, data: unknown, options?: IAxiosHttpGet) => {
-    try {
-        const res = await httpInstance().patch(endpoint, data, {
-            params: options?.params,
-            headers: options?.headers
-        });
-        return res.data;
-    } catch (error) {
-        console.log(`PATCH request to ${endpoint} failed:`, error);
-        throw error;
-    }
+const httpPatch = async <T>(endpoint: string, data: unknown, options?: IAxiosHttpGet): Promise<IApiResponse<T>> => {
+    const instance = await httpInstance();
+    const res = await instance.patch<IApiResponse<T>>(endpoint, data, {
+        params: options?.params,
+        headers: options?.headers
+    }).then((res) => res.data).catch((error) => error.response.data);
+    return res;
 }
 
 export const httpClient = {

@@ -8,7 +8,6 @@ import {
   Testimonials,
   CallToAction,
 } from '@/components/landing';
-import { Footer } from '@/components/layouts/Footer';
 
 export default function Home() {
   return (
