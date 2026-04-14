@@ -9,7 +9,7 @@ interface DashboardNavbarContentProps {
 }
 export default function DashboardNavbarContent({ navItems, user }: DashboardNavbarContentProps) {
     return (
-        <div className="flex h-16 items-center border-b px-6">
+        <div className="flex md:hidden h-16 items-center border-b px-6">
             <Sheet>
                 <SheetTrigger className="md:hidden flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -18,7 +18,7 @@ export default function DashboardNavbarContent({ navItems, user }: DashboardNavb
                 </SheetTrigger>
                 {/* Mobile Navigation Content */}
                 <SheetContent side="left" className="w-64!">
-                    <SheetTitle></SheetTitle>
+                    <SheetTitle className="hidden"></SheetTitle>
                     <DashboardSideBarContent navItems={navItems} user={user} className="flex" />
                 </SheetContent>
             </Sheet>

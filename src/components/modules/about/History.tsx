@@ -78,7 +78,7 @@ export function History() {
                         <div className="section-label-dot" />
                         <span className="section-label-text">Our Journey</span>
                     </div>
-                    <h2 className="text-foreground mb-4">Two Decades of Excellence</h2>
+                    <h2 className="text-foreground font-fancy mb-4">Two Decades of Excellence</h2>
                     <p className="text-lg text-muted-foreground">
                         From our founding in 2003 to becoming one of Bangladeshs premier institutions, Uttara University has continuously
                         evolved to meet the changing needs of higher education and society.

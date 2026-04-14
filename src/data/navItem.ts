@@ -10,7 +10,7 @@ const adminNavItems: INavSection[] = [
             },
             {
                 title: "My Profile",
-                href: "/admin/users",
+                href: "/cmn/profile",
                 icon: "User",
             },
 
@@ -72,7 +72,7 @@ const facultyNavItems: INavSection[] = [
             },
             {
                 title: "My Profile",
-                href: "/faculty/users",
+                href: "/cmn/profile",
                 icon: "User",
             },
 
@@ -120,7 +120,7 @@ const studentNavItems: INavSection[] = [
             },
             {
                 title: "My Profile",
-                href: "/student/users",
+                href: "/cmn/profile",
                 icon: "User",
             },
 
@@ -178,7 +178,7 @@ const superAdminNavItems: INavSection[] = [
             },
             {
                 title: "My Profile",
-                href: "/super-admin/users",
+                href: "/cmn/profile",
                 icon: "User",
             },
 

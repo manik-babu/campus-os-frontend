@@ -16,7 +16,6 @@ import {
 import { useForm } from "@tanstack/react-form"
 import { loginZodSchema } from "@/zod/auth/login"
 import AppField from "@/components/shared/AppField"
-import { useMutation } from "@tanstack/react-query"
 import { useState } from "react"
 import { Alert, AlertTitle } from "@/components/ui/alert"
 import { AlertCircleIcon } from "lucide-react"
@@ -24,17 +23,16 @@ import LoadingButton from "@/components/ui/loadingButton"
 import { Spinner } from "@/components/ui/spinner"
 import { login } from "@/services/auth.service"
 import { setCookie } from "@/lib/cookieUtils"
+import { useRouter } from "next/navigation"
+import { UserRole } from "@/@types/session"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter();
   const [formError, setFormError] = useState<string | null>(null);
-  const { mutateAsync, isPending } = useMutation({
-    mutationKey: ["login"],
-    mutationFn: login,
-  });
-
+  const [loading, setLoading] = useState(false);
   const form = useForm({
     defaultValues: {
       idNo: "",
@@ -44,18 +42,27 @@ export function LoginForm({
       onSubmit: loginZodSchema
     },
     onSubmit: async ({ value }) => {
+      setLoading(true);
       try {
-        const res = await mutateAsync(value);
-        console.log({
-          res
-        })
+        const res = await login(value);
         if (!res.ok) {
-          setFormError(res.message);
-        } else {
-          setCookie("token", res.data?.token as string);
+          setFormError(res.message || "Login failed");
+          return;
         }
+        await setCookie("token", res.data?.token as string);
+        if (res.data?.user.role != UserRole.SUPER_ADMIN) {
+          const role = res.data?.user.role.toLowerCase();
+          router.push(`/${role}/dashboard`);
+        }
+        else {
+          router.push(`/super-admin/dashboard`);
+        }
+
       } catch (error: any) {
         setFormError(error.message || "An error occurred while logging in");
+      }
+      finally {
+        setLoading(false);
       }
     },
   })
@@ -63,7 +70,7 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="py-14 px-4">
         <CardHeader>
-          <h1 className="w-full text-center">Welcome back</h1>
+          <h1 className="w-full text-center font-fancy">Welcome back</h1>
           <CardDescription className="text-center">
             Enter your ID and password below to login to your account
           </CardDescription>
@@ -118,7 +125,7 @@ export function LoginForm({
               <Field>
                 {/* <Button type="submit">Login</Button> */}
                 <LoadingButton
-                  isLoading={isPending}
+                  isLoading={loading}
                   content="Login"
                   style="btn-primary"
                   loadingContent={<><Spinner />Logging in</>}

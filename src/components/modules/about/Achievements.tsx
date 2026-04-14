@@ -86,7 +86,7 @@ export function Achievements() {
                         <div className="section-label-dot bg-background" />
                         <span className="text-xs uppercase tracking-[0.15em] text-background/80">Achievements</span>
                     </div>
-                    <h2 className="text-background/95 mb-4">By The Numbers</h2>
+                    <h2 className="text-background/95 font-fancy mb-4">By The Numbers</h2>
                     <p className="text-lg text-background/70">
                         Uttara University has consistently demonstrated excellence through measurable achievements
                         and recognition in higher education.

@@ -6,6 +6,7 @@ export interface ISessionUser {
     idNo: string;
     registrationNo: string;
     status: string;
+    departmentId: string | null;
 }
 export enum UserRole {
     STUDENT = "STUDENT",

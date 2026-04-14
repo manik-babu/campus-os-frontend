@@ -1,7 +1,7 @@
+import EnrollmentPage from "@/components/modules/enrollments/EnrollmentPage";
+
 export default function Enrollments() {
     return (
-        <div>
-            <h1>This is enrollments page</h1>
-        </div>
+        <EnrollmentPage />
     );
 }

@@ -49,7 +49,7 @@ export function AboutHero() {
                     </div>
 
                     {/* Headline */}
-                    <h1 className="mb-6 about-hero-text">
+                    <h1 className="mb-6 font-fancy about-hero-text">
                         <span className="block text-foreground">Shaping Leaders</span>
                         <span className="gradient-text block">Since 2003</span>
                     </h1>

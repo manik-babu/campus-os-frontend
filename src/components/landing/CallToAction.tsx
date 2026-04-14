@@ -26,7 +26,7 @@ export function CallToAction() {
                             <div className="section-label-dot bg-background" />
                             <span className="text-xs uppercase tracking-[0.15em] text-white/80">Ready?</span>
                         </div>
-                        <h2 className="text-white/95 mb-4">Start Your University Journey Today</h2>
+                        <h2 className="font-fancy text-white/95 mb-4">Start Your University Journey Today</h2>
                         <p className="text-lg text-white/70 mb-8">
                             Whether youre interested in our programs, want to schedule a campus visit, or have questions about
                             admissions, our team is ready to help you take the next step.
@@ -76,7 +76,7 @@ export function CallToAction() {
 
                     {/* Right side - Application form */}
                     <div className="bg-background/10 backdrop-blur-sm rounded-2xl p-8 border border-background/20">
-                        <h3 className="text-2xl font-semibold text-white mb-6">Apply Now</h3>
+                        <h3 className="text-2xl font-fancy font-semibold text-white mb-6">Apply Now</h3>
 
                         <form className="space-y-4">
                             <div>

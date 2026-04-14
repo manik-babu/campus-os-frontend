@@ -21,7 +21,7 @@ function Feature({ icon, title, description }: FeatureProps) {
                 </div>
             </div>
             <div className="flex-1">
-                <h3 className="text-lg font-semibold text-foreground mb-2">{title}</h3>
+                <h3 className="text-lg font-fancy font-semibold text-foreground mb-2">{title}</h3>
                 <p className="text-muted-foreground">{description}</p>
             </div>
         </div>
@@ -195,7 +195,7 @@ export function Features() {
                         <div className="section-label-dot" />
                         <span className="section-label-text">Why Choose Us</span>
                     </div>
-                    <h2 className="text-foreground mb-4 feature-text">World-Class Education</h2>
+                    <h2 className="text-foreground font-fancy mb-4 feature-text">World-Class Education</h2>
                     <p className="text-lg text-muted-foreground feature-text">
                         We provide more than just education. We create an environment where students thrive, innovate, and
                         prepare for meaningful careers.

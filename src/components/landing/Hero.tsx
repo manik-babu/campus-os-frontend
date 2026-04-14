@@ -3,6 +3,7 @@
 import { ArrowRight } from 'lucide-react';
 import gsap from "gsap"
 import { useGSAP } from '@gsap/react';
+import Link from 'next/link';
 interface HeroProps {
     title?: string;
     subtitle?: string;
@@ -50,7 +51,7 @@ export function Hero({
 
                         {/* Headline */}
                         <div className="space-y-4">
-                            <h1 className="leading-tight hero-text text-6xl!">
+                            <h1 className="font-fancy leading-tight hero-text text-6xl!">
                                 <span className="block text-foreground">{title.split(' ').slice(0, -1).join(' ')}</span>
                                 <span className="gradient-text block">{title.split(' ').slice(-1)[0]}</span>
                             </h1>
@@ -70,9 +71,12 @@ export function Hero({
                                 {ctaText}
                                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
-                            <button className="btn-secondary">
+                            <Link href={"/about"} className="btn-secondary">
                                 {ctaSecondaryText}
-                            </button>
+                            </Link>
+                            {/* <button className="btn-secondary">
+                                {ctaSecondaryText}
+                            </button> */}
                         </div>
 
                         {/* Trust Indicators */}

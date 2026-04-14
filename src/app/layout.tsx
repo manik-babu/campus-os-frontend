@@ -4,11 +4,11 @@ import "./globals.css";
 import "./app.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/providers/theme-provider";
-import QueryClientProviders from "@/providers/queryClientProvider";
+import { Toaster } from "@/components/ui/sonner";
 
-const robotoHeading = Roboto({subsets:['latin'],variable:'--font-heading'});
+const robotoHeading = Roboto({ subsets: ['latin'], variable: '--font-heading' });
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,9 +43,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QueryClientProviders>
-            {children}
-          </QueryClientProviders>
+          {children}
+          <Toaster position="top-center" />
         </ThemeProvider>
       </body>
     </html>

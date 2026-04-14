@@ -143,7 +143,7 @@ export function Programs() {
                         <div className="section-label-dot" />
                         <span className="section-label-text">Our Programs</span>
                     </div>
-                    <h2 className="text-foreground mb-4 program-text">Academic Excellence</h2>
+                    <h2 className="font-fancy text-foreground mb-4 program-text">Academic Excellence</h2>
                     <p className="text-lg text-muted-foreground program-text">
                         Choose from our diverse range of undergraduate, postgraduate, and research programs designed to
                         prepare you for success in a rapidly evolving world.
@@ -160,7 +160,7 @@ export function Programs() {
 
                 {/* CTA */}
                 <div id='consultation' className="mt-16 rounded-2xl border border-[#0052FF]/20 bg-[#0052FF]/5 p-8 text-center">
-                    <h3 className="text-2xl font-semibold text-foreground mb-3">Still deciding?</h3>
+                    <h3 className=" text-2xl font-semibold text-foreground mb-3">Still deciding?</h3>
                     <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
                         Our academic advisors are here to help you find the perfect program that matches your goals and aspirations.
                     </p>

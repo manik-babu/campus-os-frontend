@@ -86,7 +86,7 @@ export function Testimonials() {
                         <div className="section-label-dot" />
                         <span className="section-label-text">Student Stories</span>
                     </div>
-                    <h2 className="text-foreground mb-4">Hear from Our Alumni</h2>
+                    <h2 className="font-fancy text-foreground mb-4">Hear from Our Alumni</h2>
                     <p className="text-lg text-muted-foreground">
                         Real stories from students who transformed their futures at Uttara University. Their success is our
                         pride.

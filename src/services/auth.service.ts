@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
 
 import { ISessionUser } from "@/@types/session";
@@ -5,24 +6,31 @@ import { httpClient } from "@/lib/axios/httpClient"
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { env } from "@/env";
+import { IApiResponse } from "@/@types/axios";
 
-export const login = async ({ idNo, password }: { idNo: string, password: string }) => {
+export const login = async ({ idNo, password }: { idNo: string, password: string }): Promise<IApiResponse<{ token: string; user: ISessionUser }>> => {
     try {
-        const res = await httpClient.post<{ token: string }>("/auth/login", {
+        const res = await httpClient.post<{ token: string; user: ISessionUser }>("/auth/login", {
             idNo,
             password,
         });
         return res;
-    } catch (error) {
+    } catch (error: any) {
         console.error("Login error", error);
-        throw error;
+        return {
+            ok: false,
+            message: error.message || "Login failed",
+        }
     }
 }
 
-export const getSession = async () => {
+export const getSession = async (): Promise<ISessionUser | null> => {
     const cookie = await cookies();
     const token = cookie.get("token")?.value;
 
+    if (!token) {
+        return null;
+    }
     let user: ISessionUser | null = null;
     try {
         user = jwt.verify(token as string, env.JWT_SECRET as string) as ISessionUser;

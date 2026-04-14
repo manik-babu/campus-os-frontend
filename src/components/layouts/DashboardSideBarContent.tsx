@@ -34,7 +34,7 @@ export default function DashboardSideBarContent({ navItems, user, className }: {
 
                             <div className="space-y-1">
                                 {section.items.map((item, id) => {
-                                    const isActive = pathname === item.href;
+                                    const isActive = pathname.startsWith(item.href);
                                     // Icon Mapper Function
                                     const Icon = getIconComponent(item.icon);
 

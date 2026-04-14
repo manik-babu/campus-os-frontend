@@ -60,7 +60,7 @@ export function OurStrengths() {
                         <div className="section-label-dot" />
                         <span className="section-label-text">Competitive Edge</span>
                     </div>
-                    <h2 className="text-foreground mb-4">Why Uttara University Stands Out</h2>
+                    <h2 className="text-foreground font-fancy mb-4">Why Uttara University Stands Out</h2>
                     <p className="text-lg text-muted-foreground">
                         We differentiate ourselves through our commitment to academic excellence, student success,
                         and contribution to society.

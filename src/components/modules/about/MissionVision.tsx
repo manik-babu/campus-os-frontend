@@ -83,7 +83,7 @@ export function MissionVision() {
                         <div className="section-label-dot" />
                         <span className="section-label-text">Our Foundation</span>
                     </div>
-                    <h2 className="text-foreground mb-2 mission-text" data-animatable="heading">
+                    <h2 className="text-foreground font-fancy mb-2 mission-text" data-animatable="heading">
                         Mission &amp; Vision
                     </h2>
                     <div className="h-1 w-full mission-line bg-gradient-to-r from-[#0052FF] to-[#4D7CFF] rounded-full"

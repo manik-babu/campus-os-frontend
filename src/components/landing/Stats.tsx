@@ -98,7 +98,7 @@ export function Stats() {
                         <div className="section-label-dot bg-background" />
                         <span className="text-xs uppercase tracking-[0.15em] text-background/80">By The Numbers</span>
                     </div>
-                    <h2 className="stats-text text-background/95">
+                    <h2 className="font-fancy stats-text text-background/95">
                         Trusted by thousands of students
                     </h2>
                     <p className="stats-text mt-4 text-base text-background/70 max-w-2xl mx-auto">

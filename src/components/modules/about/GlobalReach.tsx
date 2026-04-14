@@ -17,7 +17,7 @@ export function GlobalReach() {
                         <div className="section-label-dot" />
                         <span className="section-label-text">Global Presence</span>
                     </div>
-                    <h2 className="text-foreground mb-4">International Recognition &amp; Partnerships</h2>
+                    <h2 className="text-foreground font-fancy mb-4">International Recognition &amp; Partnerships</h2>
                     <p className="text-lg text-muted-foreground">
                         Uttara University maintains strong partnerships and collaborations with institutions worldwide,
                         facilitating student exchange, joint research, and academic excellence.
