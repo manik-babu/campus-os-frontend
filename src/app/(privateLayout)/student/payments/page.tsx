@@ -1,7 +1,8 @@
-export default function Payments() {
+import StudentBills from "@/components/modules/bills/StudentBillPage";
+
+export default async function Payments() {
+
     return (
-        <div>
-            <h1>This is payments page</h1>
-        </div>
+        <StudentBills />
     );
 }

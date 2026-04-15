@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { BookOpen, Plus } from "lucide-react";
 import { EnrollmentPageSkeleton } from "@/components/skeletons/enrollments/EnrollmentPageSkeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 
 export default function EnrollmentPage() {
@@ -33,6 +34,8 @@ export default function EnrollmentPage() {
                 setSemesters([]);
             } else {
                 setSemesters(res.data as ISemester[]);
+                if (res.data)
+                    setSelectedSemesterId(res.data[0].id);
             }
         } catch (error) {
             console.error("Error fetching semesters:", error);
@@ -91,18 +94,23 @@ export default function EnrollmentPage() {
                         <label className="text-sm font-medium text-foreground mb-2 block">
                             Select Semester
                         </label>
-                        <Select value={selectedSemesterId} onValueChange={setSelectedSemesterId}>
-                            <SelectTrigger>
-                                <SelectValue placeholder="Choose a semester" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {semesters?.map((semester) => (
-                                    <SelectItem key={semester.id} value={semester.id}>
-                                        {semester.name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+                        {
+                            !semesters ?
+                                <Skeleton className="w-32 h-8" />
+                                :
+                                <Select value={selectedSemesterId} onValueChange={setSelectedSemesterId}>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Choose a semester" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {semesters?.map((semester) => (
+                                            <SelectItem key={semester.id} value={semester.id}>
+                                                {semester.name}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                        }
                     </div>
 
                     {/* Add Enrollment Button */}
@@ -117,16 +125,18 @@ export default function EnrollmentPage() {
                 </div>
 
                 {/* Semester Info */}
-                {selectedSemesterId && getSelectedSemesterName() && (
+                {selectedSemesterId && getSelectedSemesterName() ? (
                     <div className="text-sm text-muted-foreground">
-                        Showing courses for: <span className="font-medium text-foreground">{getSelectedSemesterName()}</span>
+                        Showing results for: <span className="font-medium text-foreground">{getSelectedSemesterName()}</span>
                     </div>
-                )}
+                ) :
+                    <Skeleton className="w-56 h-4" />
+                }
             </div>
 
             {/* Courses Table */}
             {
-                isLoading ?
+                isLoading || !semesters ?
                     <EnrollmentPageSkeleton /> :
                     <div className="space-y-4">
                         {selectedSemesterId && enrollments && enrollments.length > 0 && (

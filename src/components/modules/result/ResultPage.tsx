@@ -16,6 +16,7 @@ import { getResults } from "@/services/result.service";
 import { ICourseResult } from "@/@types/result";
 import AverageSgpa from "./AverageSgpa";
 import { ResultPageSkeleton } from "@/components/skeletons/result/ResultPageSkeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 
 export default function ResultPage() {
@@ -33,6 +34,8 @@ export default function ResultPage() {
                 setSemesters([]);
             } else {
                 setSemesters(res.data as ISemester[]);
+                if (res.data)
+                    setSelectedSemesterId(res.data[0].id as string)
             }
         } catch (error) {
             console.error("Error fetching semesters:", error);
@@ -91,32 +94,39 @@ export default function ResultPage() {
                         <label className="text-sm font-medium text-foreground mb-2 block">
                             Select Semester
                         </label>
-                        <Select value={selectedSemesterId} onValueChange={setSelectedSemesterId}>
-                            <SelectTrigger>
-                                <SelectValue placeholder="Choose a semester" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {semesters?.map((semester) => (
-                                    <SelectItem key={semester.id} value={semester.id}>
-                                        {semester.name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+                        {
+                            !semesters ?
+                                <Skeleton className="w-31 h-8" />
+                                :
+                                <Select value={selectedSemesterId} onValueChange={setSelectedSemesterId}>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Choose a semester" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {semesters?.map((semester) => (
+                                            <SelectItem key={semester.id} value={semester.id}>
+                                                {semester.name}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                        }
                     </div>
                 </div>
 
                 {/* Semester Info */}
-                {selectedSemesterId && getSelectedSemesterName() && (
+                {selectedSemesterId && getSelectedSemesterName() ? (
                     <div className="text-sm text-muted-foreground">
                         Showing results for: <span className="font-medium text-foreground">{getSelectedSemesterName()}</span>
                     </div>
-                )}
+                ) :
+                    <Skeleton className="w-56 h-4" />
+                }
             </div>
 
             {/* Result Table */}
             {
-                isLoading ?
+                isLoading || !semesters ?
                     <ResultPageSkeleton /> :
                     <div className="space-y-4">
 

@@ -19,7 +19,7 @@ interface ErrorPageProps {
 export function ErrorPage({
     title = "Something went wrong",
     message = "We encountered an unexpected error. Please try again later.",
-    statusCode,
+    statusCode = 500,
     showHomeButton = true,
     showBackButton = true,
     showRefreshButton = true,
