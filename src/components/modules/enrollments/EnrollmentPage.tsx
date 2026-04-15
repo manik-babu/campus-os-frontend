@@ -78,7 +78,7 @@ export default function EnrollmentPage() {
         <div className="space-y-8">
             {/* Header Section */}
             <div className="space-y-2">
-                <h1 className="text-3xl font-bold text-foreground">My Enrollments</h1>
+                <h2 className="text-3xl font-bold text-foreground">My Enrollments</h2>
                 <p className="text-muted-foreground">
                     View and manage your course enrollments for each semester
                 </p>

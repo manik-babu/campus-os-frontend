@@ -37,7 +37,7 @@ export default function SuperAdminProfile({ user }: { user: IUserDetails }) {
                         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <div className="flex items-center gap-3 mb-2">
-                                    <h1 className="text-3xl font-bold text-foreground font-fancy">{user.name}</h1>
+                                    <h3 className="font-bold text-foreground">{user.name}</h3>
                                     <Badge className="bg-gradient-to-r from-[#0052FF] to-[#4D7CFF] text-white h-fit">
                                         <Shield className="h-4 w-4 mr-1" />
                                         Super Admin

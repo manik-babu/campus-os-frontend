@@ -38,7 +38,7 @@ export default function FacultyProfile({ user }: { user: IUserDetails }) {
                     <div className="flex-1">
                         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <div>
-                                <h1 className="text-3xl font-bold text-foreground font-fancy">{user.name}</h1>
+                                <h3 className="font-bold text-foreground">{user.name}</h3>
                                 <p className="text-muted-foreground text-sm mt-1 flex items-center gap-2">
                                     <Award className="h-4 w-4" />
                                     {profile?.designation}

@@ -63,7 +63,7 @@ export default function EnrollCourse({ courseOfferings, batches: initialBatches 
         <div className="space-y-8">
             {/* Header Section */}
             <div className="space-y-2">
-                <h1 className="text-3xl font-bold text-foreground">Add New Courses</h1>
+                <h2 className="text-3xl font-bold text-foreground">Add New Courses</h2>
                 <p className="text-muted-foreground max-w-2xl">
                     Browse and add available courses to your enrollment. Select your batch and search for courses to get started.
                 </p>
