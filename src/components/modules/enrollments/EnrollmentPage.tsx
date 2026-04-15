@@ -14,7 +14,8 @@ import { getEnrolledCourses } from "@/services/enrollment.service";
 import { getSemesters } from "@/services/shared.service";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { BookOpen, Plus } from "lucide-react";
+import { EnrollmentPageSkeleton } from "@/components/skeletons/enrollments/EnrollmentPageSkeleton";
 
 
 export default function EnrollmentPage() {
@@ -124,77 +125,84 @@ export default function EnrollmentPage() {
             </div>
 
             {/* Courses Table */}
-            <div className="space-y-4">
-                {selectedSemesterId && enrollments && enrollments.length > 0 && (
-                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        <div className="rounded-lg p-4">
-                            <p className="text-sm text-muted-foreground">Total Courses</p>
-                            <p className="text-2xl font-bold text-foreground mt-1">
-                                {enrollments.length}
-                            </p>
-                        </div>
-                        <div className="rounded-lg p-4">
-                            <p className="text-sm text-muted-foreground">Total Credits</p>
-                            <p className="text-2xl font-bold text-foreground mt-1">
-                                {enrollments.reduce((sum, e) => sum + (e.credits || 0), 0)}
-                            </p>
+            {
+                isLoading ?
+                    <EnrollmentPageSkeleton /> :
+                    <div className="space-y-4">
+                        {selectedSemesterId && enrollments && enrollments.length > 0 && (
+                            <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                                <div className="rounded-lg p-4">
+                                    <p className="text-sm text-muted-foreground">Total Courses</p>
+                                    <p className="text-2xl font-bold text-foreground mt-1">
+                                        {enrollments.length}
+                                    </p>
+                                </div>
+                                <div className="rounded-lg p-4">
+                                    <p className="text-sm text-muted-foreground">Total Credits</p>
+                                    <p className="text-2xl font-bold text-foreground mt-1">
+                                        {enrollments.reduce((sum, e) => sum + (e.credits || 0), 0)}
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="border rounded-lg overflow-hidden">
+                            {selectedSemesterId ? (
+                                isLoading ? (
+                                    <div className="p-8 text-center text-muted-foreground">
+                                        Loading courses...
+                                    </div>
+                                ) : enrollments && enrollments.length > 0 ? (
+                                    <Table>
+                                        <TableHeader>
+                                            <TableRow className="bg-muted/50">
+                                                <TableHead className="font-semibold">Course Code</TableHead>
+                                                <TableHead className="font-semibold">Course Title</TableHead>
+                                                <TableHead className="font-semibold text-center">Credits</TableHead>
+                                                <TableHead className="font-semibold text-center">Instructor</TableHead>
+                                                <TableHead className="font-semibold text-center">Status</TableHead>
+                                            </TableRow>
+                                        </TableHeader>
+                                        <TableBody>
+                                            {enrollments.map((enrollment) => (
+                                                <TableRow key={enrollment.id} className="hover:bg-muted/50">
+                                                    <TableCell className="font-medium text-foreground">
+                                                        {enrollment.courseCode}
+                                                    </TableCell>
+                                                    <TableCell className="text-foreground">
+                                                        {enrollment.courseTitle}
+                                                    </TableCell>
+                                                    <TableCell className="text-center text-muted-foreground">
+                                                        {enrollment.credits || "-"}
+                                                    </TableCell>
+                                                    <TableCell className="text-center text-muted-foreground">
+                                                        {enrollment.facultyName || "-"}
+                                                    </TableCell>
+                                                    <TableCell className="text-center">
+                                                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                            Enrolled
+                                                        </span>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                ) : (
+                                    <div className="p-8 h-60 text-center text-muted-foreground flex flex-col items-center justify-center gap-4">
+                                        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-muted">
+                                            <BookOpen className="h-6 w-6 text-muted-foreground" />
+                                        </div>
+                                        <p>No courses enrolled for this semester</p>
+                                    </div>
+                                )
+                            ) : (
+                                <div className="p-8 text-center text-muted-foreground">
+                                    Please select a semester to view enrollments
+                                </div>
+                            )}
                         </div>
                     </div>
-                )}
-
-                <div className="border rounded-lg overflow-hidden">
-                    {selectedSemesterId ? (
-                        isLoading ? (
-                            <div className="p-8 text-center text-muted-foreground">
-                                Loading courses...
-                            </div>
-                        ) : enrollments && enrollments.length > 0 ? (
-                            <Table>
-                                <TableHeader>
-                                    <TableRow className="bg-muted/50">
-                                        <TableHead className="font-semibold">Course Code</TableHead>
-                                        <TableHead className="font-semibold">Course Title</TableHead>
-                                        <TableHead className="font-semibold text-center">Credits</TableHead>
-                                        <TableHead className="font-semibold text-center">Instructor</TableHead>
-                                        <TableHead className="font-semibold text-center">Status</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {enrollments.map((enrollment) => (
-                                        <TableRow key={enrollment.id} className="hover:bg-muted/50">
-                                            <TableCell className="font-medium text-foreground">
-                                                {enrollment.courseCode}
-                                            </TableCell>
-                                            <TableCell className="text-foreground">
-                                                {enrollment.courseTitle}
-                                            </TableCell>
-                                            <TableCell className="text-center text-muted-foreground">
-                                                {enrollment.credits || "-"}
-                                            </TableCell>
-                                            <TableCell className="text-center text-muted-foreground">
-                                                {enrollment.facultyName || "-"}
-                                            </TableCell>
-                                            <TableCell className="text-center">
-                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                                    Enrolled
-                                                </span>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        ) : (
-                            <div className="p-8 text-center text-muted-foreground">
-                                No courses enrolled for this semester
-                            </div>
-                        )
-                    ) : (
-                        <div className="p-8 text-center text-muted-foreground">
-                            Please select a semester to view enrollments
-                        </div>
-                    )}
-                </div>
-            </div>
+            }
         </div>
     );
 }

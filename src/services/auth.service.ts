@@ -39,3 +39,8 @@ export const getSession = async (): Promise<ISessionUser | null> => {
     }
     return user;
 }
+
+export const logout = async () => {
+    const cookie = await cookies();
+    cookie.delete("token");
+}

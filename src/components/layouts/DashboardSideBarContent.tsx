@@ -9,6 +9,9 @@ import { INavSection } from "@/@types/navItem";
 import { ISessionUser } from "@/@types/session";
 import { usePathname } from "next/navigation";
 import { getIconComponent } from "@/lib/iconMapper";
+import { Button } from "../ui/button";
+import { LogOut } from "lucide-react";
+import { logout } from "@/services/auth.service";
 
 export default function DashboardSideBarContent({ navItems, user, className }: { navItems: INavSection[]; user: ISessionUser; className?: string }) {
     const pathname = usePathname()
@@ -61,6 +64,16 @@ export default function DashboardSideBarContent({ navItems, user, className }: {
                             )}
                         </div>
                     ))}
+                    <div className="space-y-1">
+                        <Button
+                            onClick={logout}
+                            variant={"destructive"}
+                            className={cn("flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all w-full")}
+                        >
+                            <LogOut className="w-4 h-4" />
+                            Logout
+                        </Button>
+                    </div>
                 </nav>
             </ScrollArea>
 

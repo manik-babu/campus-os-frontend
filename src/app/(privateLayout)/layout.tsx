@@ -2,7 +2,7 @@ import DashboardNavBar from "@/components/layouts/DashboardNavBar";
 import DashboardSideBar from "@/components/layouts/DashboardSideBar";
 import { Metadata } from "next";
 
-
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
     title: "Uttara University",
     description: "Welcome to Uttara University!",
