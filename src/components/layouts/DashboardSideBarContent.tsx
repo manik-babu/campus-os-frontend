@@ -12,8 +12,16 @@ import { getIconComponent } from "@/lib/iconMapper";
 import { Button } from "../ui/button";
 import { LogOut } from "lucide-react";
 import { logout } from "@/services/auth.service";
+import { Dispatch, SetStateAction } from "react";
 
-export default function DashboardSideBarContent({ navItems, user, className }: { navItems: INavSection[]; user: ISessionUser; className?: string }) {
+interface DashboardSideBarContentProps {
+    navItems: INavSection[];
+    user: ISessionUser;
+    className?: string;
+    setCloseSidebar?: Dispatch<SetStateAction<boolean>>; // Optional prop to control sidebar visibility on mobile
+}
+
+export default function DashboardSideBarContent({ navItems, user, className, setCloseSidebar }: DashboardSideBarContentProps) {
     const pathname = usePathname()
     return (
         <div className={cn("transition-all h-full md:w-64 flex-col border-r bg-card overflow-y-auto", className)}>
@@ -43,6 +51,11 @@ export default function DashboardSideBarContent({ navItems, user, className }: {
 
                                     return (
                                         <Link
+                                            onClick={() => {
+                                                if (setCloseSidebar) {
+                                                    setCloseSidebar(false);
+                                                }
+                                            }}
                                             href={item.href}
                                             key={id}
                                             className={cn(

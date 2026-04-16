@@ -40,6 +40,22 @@ export const getSession = async (): Promise<ISessionUser | null> => {
     return user;
 }
 
+export const changePassword = async ({ oldPassword, newPassword }: { oldPassword: string, newPassword: string }): Promise<IApiResponse<boolean>> => {
+    try {
+        const res = await httpClient.patch<boolean>("/auth/change-password", {
+            oldPassword,
+            newPassword,
+        });
+        return res;
+    } catch (error: any) {
+        console.error("Password change error", error);
+        return {
+            ok: false,
+            message: error.message || "Password change failed",
+        }
+    }
+}
+
 export const logout = async () => {
     const cookie = await cookies();
     cookie.delete("token");
