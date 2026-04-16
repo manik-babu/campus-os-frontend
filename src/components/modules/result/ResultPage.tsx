@@ -177,12 +177,12 @@ export default function ResultPage() {
                                                 </TableCell>
                                                 <TableCell className="text-center">
                                                     <span className="px-2 py-1 text-sm font-semibold">
-                                                        {result.result.attendance ? `${result.result.attendance}%` : "N/A"}
+                                                        {result.result.attendance ? `${result.result.attendance}` : "N/A"}
                                                     </span>
                                                 </TableCell>
                                                 <TableCell className="text-center">
                                                     <span className="px-3 py-1 rounded-full bg-[#0052FF]/10 border border-[#0052FF]/20 text-sm font-bold text-[#0052FF]">
-                                                        {result.result.points || "N/A"}
+                                                        {result.result.points ? parseFloat(result.result.points).toFixed(2) : "N/A"}
                                                     </span>
                                                 </TableCell>
                                                 <TableCell className="text-center">

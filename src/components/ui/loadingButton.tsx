@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 interface LoadingButtonProps {
     isLoading: boolean;
     content: string | React.ReactNode;
@@ -9,7 +11,7 @@ interface LoadingButtonProps {
 
 export default function LoadingButton({ isLoading, type = "submit", style = "btn-primary", content, loadingContent, className }: LoadingButtonProps) {
     return (
-        <button type={type} className={`${style} ${className || ''}`} disabled={isLoading}>
+        <button type={type} className={cn(style, className, "cursor-pointer")} disabled={isLoading}>
             {isLoading ? loadingContent : content}
         </button>
     );

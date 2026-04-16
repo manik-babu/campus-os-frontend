@@ -81,7 +81,7 @@ export function LoginForm({
             e.stopPropagation();
             form.handleSubmit();
           }}>
-            <FieldGroup>
+            <FieldGroup className="gap-2">
               <form.Field
                 name="idNo"
               >
@@ -110,28 +110,21 @@ export function LoginForm({
                   )
                 }
               </form.Field>
-
-              <Field>
-                <FieldDescription className="hover:underline cursor-pointer">Forgot your password?</FieldDescription>
-              </Field>
-              <Field>
-                {
-                  formError && <Alert variant={"destructive"}>
-                    <AlertCircleIcon />
-                    <AlertTitle>{formError}</AlertTitle>
-                  </Alert>
-                }
-              </Field>
-              <Field>
-                {/* <Button type="submit">Login</Button> */}
-                <LoadingButton
-                  isLoading={loading}
-                  content="Login"
-                  style="btn-primary"
-                  loadingContent={<><Spinner />Logging in</>}
-                />
-
-              </Field>
+              <FieldDescription className="hover:underline cursor-pointer">Forgot your password?</FieldDescription>
+              {
+                formError && <Alert variant={"destructive"}>
+                  <AlertCircleIcon />
+                  <AlertTitle>{formError}</AlertTitle>
+                </Alert>
+              }
+              {/* <Button type="submit">Login</Button> */}
+              <LoadingButton
+                isLoading={loading}
+                content="Login"
+                style="btn-primary"
+                loadingContent={<><Spinner />Logging in</>}
+                className="mt-4"
+              />
             </FieldGroup>
           </form>
         </CardContent>
