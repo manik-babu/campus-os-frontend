@@ -4,6 +4,7 @@ export interface IEnrolledCourse {
     courseTitle: string;
     credits: number;
     facultyName: string;
+    offeringId: string;
 }
 
 export interface ISemester {

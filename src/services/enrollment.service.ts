@@ -5,12 +5,8 @@ import { ICourseOfferingsData, IEnrolledCourse } from "@/@types/enrollment";
 import { httpClient } from "@/lib/axios/httpClient";
 
 
-export const getEnrolledCourses = async (semesterId?: string): Promise<IApiResponse<IEnrolledCourse[]>> => {
-    const res = await httpClient.get<IEnrolledCourse[]>("/students/enrollments", {
-        params: {
-            semesterId: semesterId || "",
-        },
-    });
+export const getEnrolledCourses = async (semesterId: string): Promise<IApiResponse<IEnrolledCourse[]>> => {
+    const res = await httpClient.get<IEnrolledCourse[]>(`/students/enrollments/${semesterId}`);
     return res;
 }
 export const getCourseOfferings = async ({ search, batchId }: { search?: string; batchId?: string }): Promise<IApiResponse<ICourseOfferingsData>> => {

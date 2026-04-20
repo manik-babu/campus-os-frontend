@@ -1,7 +1,7 @@
+import FacultyClass from "@/components/modules/facultyClass/FacultyClass";
+
 export default function MyClasses() {
     return (
-        <div>
-            <h1>This is my-classes page</h1>
-        </div>
+        <FacultyClass />
     );
 }

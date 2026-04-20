@@ -16,7 +16,12 @@ const nextConfig: NextConfig = {
       source: "/api/:path*",
       destination: `${env.NEXT_PUBLIC_BACKEND_URL}/api/:path*`
     }]
-  }
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '200mb', // Or any value supported by the bytes package
+    },
+  },
 };
 
 export default nextConfig;

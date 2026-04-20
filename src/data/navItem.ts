@@ -82,20 +82,15 @@ const facultyNavItems: INavSection[] = [
         title: "Academics",
         items: [
             {
+                title: "Class Rooms",
+                href: "/faculty/class-rooms",
+                icon: "BookOpen",
+            },
+            {
                 title: "Classes",
-                href: "/faculty/my-classes",
+                href: "/faculty/classes",
                 icon: "Layers",
             },
-            {
-                title: "Attendance",
-                href: "/faculty/student/attendance",
-                icon: "CheckSquare",
-            },
-            {
-                title: "Grades",
-                href: "/faculty/student/result",
-                icon: "FileText",
-            }
         ]
     },
     {
