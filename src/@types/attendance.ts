@@ -18,3 +18,15 @@ export interface IAttendanceStudent {
     studentIdNo: string;
     studentName: string;
 }
+
+export interface IStudentAttendanceData {
+    dates: string[];
+    records: IAttendanceRecord[];
+}
+
+export interface IAttendanceRecord {
+    studentName: string;
+    studentIdNo: string;
+    attendance: boolean[];
+}
+

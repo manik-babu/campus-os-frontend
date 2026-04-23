@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { toast } from "sonner";
 import TakeAttendance from "./TakeAttendance";
 import { IAttendanceData } from "@/@types/attendance";
@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 import { getStudents } from "@/services/facultyClass.service";
 
 
-export default function AttendancePage() {
+export default function TakeAttendancePage() {
     const { classId } = useParams();
     const [data, setData] = useState<IAttendanceData | null>(null);
 
