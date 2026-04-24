@@ -87,7 +87,7 @@ export default function ClassRoomHomePage({ posts: initialPosts, user, classDeta
     };
     return (
         <div >
-            <div className="border border-border rounded-lg bg-card p-6">
+            <div className="border border-border rounded-lg bg-[#002fff0f] p-6">
                 <h3 className=" font-bold mb-2">{classDetails.courseCode} - {classDetails.courseName}</h3>
                 {
                     user.role === UserRole.FACULTY ?

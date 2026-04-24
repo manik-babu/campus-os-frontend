@@ -92,53 +92,55 @@ export default function ViewStudentAttendance() {
                     </SelectContent>
                 </Select>
             </div>
-            {
-                loading ?
-                    <AttendanceTableSkeleton />
-                    :
-                    attendance && attendance.dates.length > 0 ? (
-                        <Table>
-                            <TableHeader>
-                                <TableRow className="bg-muted/50">
-                                    <TableHead className="font-semibold w-28">Student ID</TableHead>
-                                    <TableHead className="font-semibold">Name</TableHead>
-                                    {
-                                        attendance && attendance.dates.map((date) => (
-                                            <TableHead key={date} className="font-semibold text-center">
-                                                {getDate(date)}
-                                            </TableHead>
-                                        ))
-                                    }
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {attendance && attendance.records.map((record: IAttendanceRecord) => (
-                                    <TableRow key={record.studentIdNo} className="hover:bg-muted/50">
-                                        <TableCell className="font-medium text-foreground">
-                                            {record.studentIdNo}
-                                        </TableCell>
-                                        <TableCell className="text-foreground">
-                                            {record.studentName}
-                                        </TableCell>
+            <div className="rounded-lg border overflow-hidden">
+                {
+                    loading ?
+                        <AttendanceTableSkeleton />
+                        :
+                        attendance && attendance.dates.length > 0 ? (
+                            <Table>
+                                <TableHeader>
+                                    <TableRow className="bg-muted/50">
+                                        <TableHead className="font-semibold w-28">Student ID</TableHead>
+                                        <TableHead className="font-semibold">Name</TableHead>
                                         {
-                                            record.attendance.map((status, index) => (
-                                                <TableCell key={index} className="text-center text-muted-foreground">
-                                                    {
-                                                        status ? "P" : "A"
-                                                    }
-                                                </TableCell>
+                                            attendance && attendance.dates.map((date) => (
+                                                <TableHead key={date} className="font-semibold text-center">
+                                                    {getDate(date)}
+                                                </TableHead>
                                             ))
                                         }
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    )
-                        :
-                        <div className="flex justify-center items-center bg-card rounded-xl text-muted-foreground h-44">
-                            No attendance data available for the selected month and year.
-                        </div>
-            }
+                                </TableHeader>
+                                <TableBody>
+                                    {attendance && attendance.records.map((record: IAttendanceRecord) => (
+                                        <TableRow key={record.studentIdNo} className="hover:bg-muted/50">
+                                            <TableCell className="font-medium text-foreground">
+                                                {record.studentIdNo}
+                                            </TableCell>
+                                            <TableCell className="text-foreground">
+                                                {record.studentName}
+                                            </TableCell>
+                                            {
+                                                record.attendance.map((status, index) => (
+                                                    <TableCell key={index} className="text-center text-muted-foreground">
+                                                        {
+                                                            status ? "P" : "A"
+                                                        }
+                                                    </TableCell>
+                                                ))
+                                            }
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        )
+                            :
+                            <div className="flex justify-center items-center bg-card rounded-xl text-muted-foreground h-44">
+                                No attendance data available for the selected month and year.
+                            </div>
+                }
+            </div>
         </div>
     );
 }

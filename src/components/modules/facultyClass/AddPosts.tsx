@@ -70,7 +70,7 @@ export default function AddPost({ classId, parentId, onPost }: IAddPostProps) {
         setFormError(null);
     };
     return (
-        <div className="my-6 border border-border rounded-xl relative bg-white dark:bg-[#1E1E1E]">
+        <div className="my-6 border border-border rounded-xl relative bg-accent">
             <div className="w-full h-fit text-sm text-muted-foreground px-4 py-2">
                 {
                     attachment && <div className="flex items-center gap-2 border border-border rounded-full w-fit px-2">

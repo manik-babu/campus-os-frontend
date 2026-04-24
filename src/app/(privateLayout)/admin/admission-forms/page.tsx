@@ -1,7 +1,7 @@
-export default function AdmissionForms() {
+import AdmissionForms from "@/components/modules/admin/admission/AdmissionForms";
+
+export default function Page() {
     return (
-        <div>
-            <h1>This is admission-forms page</h1>
-        </div>
+        <AdmissionForms />
     );
 }

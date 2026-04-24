@@ -11,7 +11,7 @@ export default function AttendanceTableSkeleton() {
     const dateColumns = Array.from({ length: 6 }, (_, i) => i);
 
     return (
-        <div className="w-full rounded-lg border border-border bg-card overflow-hidden">
+        <div className="w-full animate-pulse rounded-lg border border-border bg-card overflow-hidden">
             <Table>
                 <TableHeader>
                     <TableRow className="bg-muted/50">
