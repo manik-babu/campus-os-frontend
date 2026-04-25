@@ -7,7 +7,12 @@ import { httpClient } from "@/lib/axios/httpClient";
 
 export const getFacultiesShort = async (departmentId?: string): Promise<IApiResponse<IFacultyShort[]>> => {
     try {
-        return await httpClient.get<IFacultyShort[]>(`/public/faculty?departmentId=${departmentId || null}&short=true`);
+        return await httpClient.get<IFacultyShort[]>(`/public/faculty`, {
+            params: {
+                departmentId: departmentId || null,
+                short: true,
+            }
+        });
     } catch (error: any) {
         return {
             ok: false,
@@ -17,7 +22,12 @@ export const getFacultiesShort = async (departmentId?: string): Promise<IApiResp
 }
 export const getFaculties = async (departmentId?: string): Promise<IApiResponse<IFacultyShort[]>> => {
     try {
-        return await httpClient.get<IFacultyShort[]>(`/public/faculty?departmentId=${departmentId || null}&short=false`);
+        return await httpClient.get<IFacultyShort[]>(`/public/faculty`, {
+            params: {
+                departmentId: departmentId || null,
+                short: false,
+            }
+        });
     } catch (error: any) {
         return {
             ok: false,

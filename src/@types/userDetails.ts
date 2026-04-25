@@ -44,7 +44,6 @@ export interface IFacultyProfile {
     createdAt: string;
     updatedAt: string;
     department: Department;
-    graduations: Graduation[];
 }
 
 export interface Department {

@@ -144,10 +144,10 @@ export default function CourseOfferingPage({ courses, batches, faculties, semest
                                                 value={field.state.value}
                                                 onValueChange={(value) => { field.handleChange(value); }}
                                             >
-                                                <SelectTrigger className="relative!">
-                                                    <SelectValue className="relative!" placeholder="Choose a faculty" />
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="Choose a faculty" />
                                                 </SelectTrigger>
-                                                <SelectContent className="relative!">
+                                                <SelectContent>
                                                     {faculties?.map((faculty) => (
                                                         <SelectItem key={faculty.id} value={faculty.id}>
                                                             {faculty.idNo} - {faculty.name}

@@ -31,3 +31,19 @@ export interface ICreatedFaculty {
     name: string;
     email: string;
 }
+
+export interface IAdminDashboardData {
+    students: IAdminDashboardStudent[];
+    total: IAdminDashboardTotal;
+}
+
+export interface IAdminDashboardStudent {
+    batchNo: number;
+    studentCount: number;
+}
+export interface IAdminDashboardTotal {
+    admissionForms: number;
+    faculties: number;
+    courses: number;
+    batches: number;
+}

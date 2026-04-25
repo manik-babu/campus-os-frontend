@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
-import { IBatchInput, ICourses, ICreatedFaculty, IFacultyProfileData } from "@/@types/admin";
+import { IAdminDashboardData, IBatchInput, ICourses, ICreatedFaculty, IFacultyProfileData } from "@/@types/admin";
 import { IAdmissionFormDetails, IAdmissionFormsData, IRegisterUserData, IStudentProfileData } from "@/@types/admission";
 import { IApiResponse } from "@/@types/axios";
 import { IBatch } from "@/@types/shared";
@@ -115,3 +115,14 @@ export const AddCourseOffering = async (data: ICourseOfferingInput): Promise<IAp
         }
     }
 }
+
+export const getAdminDashboardData = async (): Promise<IApiResponse<IAdminDashboardData>> => {
+    try {
+        return await httpClient.get<IAdminDashboardData>("/admin/dashboard");
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to fetch dashboard data",
+        }
+    }
+};

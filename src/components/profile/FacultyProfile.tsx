@@ -129,31 +129,7 @@ export default function FacultyProfile({ user }: { user: IUserDetails }) {
                         </CardContent>
                     </Card>
 
-                    {/* Educational Qualifications */}
-                    {profile?.graduations && profile.graduations.length > 0 && (
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2 text-xl font-fancy">
-                                    <GraduationCap className="h-5 w-5 text-[#0052FF]" />
-                                    Educational Qualifications
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent className="space-y-4">
-                                {profile.graduations.map((graduation, idx) => (
-                                    <div key={idx} className="p-4 rounded-lg border border-border hover:border-[#0052FF]/30 transition-all">
-                                        <div className="flex items-start justify-between mb-2">
-                                            <div>
-                                                <p className="font-semibold text-foreground">{graduation.degree}</p>
-                                                <p className="text-sm text-muted-foreground">{graduation.major}</p>
-                                            </div>
-                                            <Badge>{graduation.passingYear}</Badge>
-                                        </div>
-                                        <p className="text-sm text-muted-foreground">Institute: {graduation.institute}</p>
-                                    </div>
-                                ))}
-                            </CardContent>
-                        </Card>
-                    )}
+
                 </div>
 
                 {/* Right Column */}
