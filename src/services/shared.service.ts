@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { ISemester } from "@/@types/enrollment";
@@ -11,10 +12,16 @@ export const getSemesters = async () => {
     return res;
 }
 export const getBatches = async (departmentId?: string): Promise<IApiResponse<IBatch[]>> => {
-    const res = await httpClient.get<IBatch[]>("/common/batches", {
-        params: {
-            departmentId: departmentId || ""
+    try {
+        return await httpClient.get<IBatch[]>("/common/batches", {
+            params: {
+                departmentId
+            }
+        });
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to fetch batches",
         }
-    });
-    return res;
+    }
 }

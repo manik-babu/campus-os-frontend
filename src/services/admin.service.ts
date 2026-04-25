@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
-
+import { IBatchInput, ICourses } from "@/@types/admin";
 import { IAdmissionFormDetails, IAdmissionFormsData, IRegisterUserData, IStudentProfileData } from "@/@types/admission";
 import { IApiResponse } from "@/@types/axios";
+import { IBatch } from "@/@types/shared";
 import { httpClient } from "@/lib/axios/httpClient";
+import { ICourseOfferingInput } from "./types";
 
 export const getAdmissionForms = async (filter: { search: string; page: number; sortBy: "asc" | "desc" }): Promise<IApiResponse<IAdmissionFormsData>> => {
     try {
@@ -51,6 +53,47 @@ export const updateAdmissionFormStatus = async (formId: string, status: "APPROVE
         return {
             ok: false,
             message: error.message || "Failed to update admission form status",
+        }
+    }
+}
+
+export const addNewBatch = async (data: IBatchInput): Promise<IApiResponse<IBatch>> => {
+    try {
+        return await httpClient.post<IBatch>("/admin/create-batch", data);
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to add new batch",
+        }
+    }
+}
+export const getCourses = async (departmentId: string): Promise<IApiResponse<ICourses[]>> => {
+    try {
+        return await httpClient.get<ICourses[]>(`/public/courses?departmentId=${departmentId}`);
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to fetch courses",
+        }
+    }
+}
+export const addNewCourse = async (data: { code: string; title: string; description: string; credits: number; departmentId: string }): Promise<IApiResponse<null>> => {
+    try {
+        return await httpClient.post<null>("/admin/create-course", data);
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to add new course",
+        }
+    }
+}
+export const AddCourseOffering = async (data: ICourseOfferingInput): Promise<IApiResponse<null>> => {
+    try {
+        return await httpClient.post<null>("/admin/create-course-offering", data);
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to create course offering"
         }
     }
 }

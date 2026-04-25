@@ -35,17 +35,17 @@ const adminNavItems: INavSection[] = [
         items: [
             {
                 title: "Batches",
-                href: "/admin/batches/add",
+                href: "/admin/batches",
                 icon: "Layers",
             },
             {
                 title: "Courses",
-                href: "/admin/courses/add",
+                href: "/admin/courses",
                 icon: "BookOpen",
             },
             {
                 title: "Offerings",
-                href: "/admin/offerings/add",
+                href: "/admin/offerings",
                 icon: "Layers",
             }
         ]

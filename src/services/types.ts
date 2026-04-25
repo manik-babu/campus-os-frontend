@@ -16,3 +16,12 @@ export interface IAddAttendanceData {
     isPresent: boolean;
     courseOfferingId: string;
 }
+
+export interface ICourseOfferingInput {
+    departmentId: string;
+    courseId: string;
+    facultyId: string;
+    batchId: string;
+    semesterId: string;
+    creditFees: number;
+}

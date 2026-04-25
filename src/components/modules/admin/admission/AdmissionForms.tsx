@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import FormDetails from "./FormDetails";
 import FormCard from "./FormCard";
 import { Button } from "@/components/ui/button";
+import { AdmissionFormCardSkeleton } from "@/components/skeletons/AdmissionFormCard";
 
 export default function AdmissionForms() {
     const data = useAdmissionFormStore(state => state.data);
@@ -125,9 +126,9 @@ export default function AdmissionForms() {
             </div>
             {
                 loading ? (
-                    <p>Loading...</p>
+                    <AdmissionFormCardSkeleton />
                 ) : (
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col space-y-4">
                         {
                             data?.forms.length === 0 ? (
                                 <p>No forms found.</p>
