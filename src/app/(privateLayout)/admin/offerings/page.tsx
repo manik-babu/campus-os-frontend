@@ -14,7 +14,7 @@ export default async function Offerings() {
     if (!session || !session.departmentId) {
         return <ErrorPage message="Unauthorized access. Please login to access this page." />
     }
-    const [courses, batches, faculties, semesters] = await Promise.all([getCourses(session?.departmentId), getBatches(), getFacultiesShort(session?.departmentId), getSemesters()]);
+    const [courses, batches, faculties, semesters] = await Promise.all([getCourses(session?.departmentId), getBatches(), getFacultiesShort(), getSemesters()]);
     console.log({
         faculties
     })

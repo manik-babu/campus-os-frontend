@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
-import { IBatchInput, ICourses } from "@/@types/admin";
+import { IBatchInput, ICourses, ICreatedFaculty, IFacultyProfileData } from "@/@types/admin";
 import { IAdmissionFormDetails, IAdmissionFormsData, IRegisterUserData, IStudentProfileData } from "@/@types/admission";
 import { IApiResponse } from "@/@types/axios";
 import { IBatch } from "@/@types/shared";
@@ -41,6 +41,24 @@ export const admitStudent = async (userData: IRegisterUserData, profileData: ISt
         return {
             ok: false,
             message: error.message || "Failed to admit student",
+        }
+    }
+}
+export const registerFaculty = async (image: File, userData: IRegisterUserData, profileData: IFacultyProfileData): Promise<IApiResponse<ICreatedFaculty>> => {
+    try {
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("userData", JSON.stringify(userData));
+        formData.append("profileData", JSON.stringify(profileData));
+        return await httpClient.post<ICreatedFaculty>("/auth/register", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to register faculty",
         }
     }
 }
