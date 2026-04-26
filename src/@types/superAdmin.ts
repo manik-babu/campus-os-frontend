@@ -4,3 +4,11 @@ export interface IDepartment {
     shortName: string;
     description: string;
 }
+
+export interface IAdminRegistrationData {
+    departmentId: string;
+    phoneNumber: string;
+    salary: number;
+    presentAddress: string;
+    permanentAddress: string;
+}

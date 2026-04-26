@@ -7,6 +7,7 @@ import { IApiResponse } from "@/@types/axios";
 import { IBatch } from "@/@types/shared";
 import { httpClient } from "@/lib/axios/httpClient";
 import { ICourseOfferingInput } from "./types";
+import { AdminRegistrationData } from "@/zod/adminRegistration";
 
 export const getAdmissionForms = async (filter: { search: string; page: number; sortBy: "asc" | "desc" }): Promise<IApiResponse<IAdmissionFormsData>> => {
     try {

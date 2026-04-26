@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
+import { ICreatedFaculty } from "@/@types/admin";
+import { IRegisterUserData } from "@/@types/admission";
 import { IApiResponse } from "@/@types/axios";
-import { IDepartment } from "@/@types/superAdmin";
+import { IAdminRegistrationData, IDepartment } from "@/@types/superAdmin";
 import { httpClient } from "@/lib/axios/httpClient";
+import { AdminRegistrationData } from "@/zod/adminRegistration";
 import { DepartmentFormData } from "@/zod/superAdmin/department";
 import { ProgramFormData } from "@/zod/superAdmin/programs";
 
@@ -53,6 +56,25 @@ export const addSemester = async (data: {
         return {
             ok: false,
             message: error.message || "Failed to add semester",
+        }
+    }
+}
+
+export const registerAdmin = async (image: File, userData: IRegisterUserData, profileData: IAdminRegistrationData): Promise<IApiResponse<ICreatedFaculty>> => {
+    try {
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("userData", JSON.stringify(userData));
+        formData.append("profileData", JSON.stringify(profileData));
+        return await httpClient.post<ICreatedFaculty>("/auth/register", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to register admin",
         }
     }
 }

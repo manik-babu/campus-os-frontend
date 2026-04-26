@@ -1,7 +1,7 @@
+import AdminRegistration from "@/components/modules/superAdmin/Register";
+
 export default function Users() {
     return (
-        <div>
-            <h1>This is users page</h1>
-        </div>
+        <AdminRegistration />
     );
 }
