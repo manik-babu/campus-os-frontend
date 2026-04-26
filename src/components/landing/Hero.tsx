@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import gsap from "gsap"
 import { useGSAP } from '@gsap/react';
 import Link from 'next/link';
+import { Button } from '../ui/button';
 interface HeroProps {
     title?: string;
     subtitle?: string;
@@ -71,8 +72,10 @@ export function Hero({
                                 {ctaText}
                                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
-                            <Link href={"/about"} className="btn-secondary">
-                                {ctaSecondaryText}
+                            <Link href={"/about"}>
+                                <Button variant={"outline"} className='h-12 px-8'>
+                                    {ctaSecondaryText}
+                                </Button>
                             </Link>
                             {/* <button className="btn-secondary">
                                 {ctaSecondaryText}

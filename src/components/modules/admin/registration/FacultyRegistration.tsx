@@ -122,8 +122,10 @@ export default function FacultyRegistration() {
             <div className="max-w-3xl mx-auto">
                 {/* Header */}
                 <div className="mb-8">
-                    <h2 className="text-4xl font-bold text-slate-900 mb-2">Faculty Registration</h2>
-                    <p className="text-slate-600">Fill in the details to register a new faculty member</p>
+                    <h2 className="text-4xl font-bold mb-2">Faculty Registration</h2>
+                    <p className="text-muted-foreground">
+                        Fill in the details to register a new faculty member
+                    </p>
                 </div>
 
                 {/* Card Container */}
@@ -136,20 +138,20 @@ export default function FacultyRegistration() {
                         className="space-y-8"
                     >
                         {/* Profile Image Section */}
-                        <div className="flex flex-col justify-center items-center pb-6 border-b border-slate-200">
+                        <div className="flex flex-col justify-center items-center pb-6 border-b">
                             <div>
                                 <ImagePicker
                                     error={imageError}
                                     image={image}
                                     setImage={setImage}
                                 />
-                                <h3 className="text-lg font-medium text-slate-900 mt-4">Profile Image</h3>
+                                <h3 className="text-lg font-medium mt-4">Profile Image</h3>
                             </div>
                         </div>
 
                         {/* Personal Information Section */}
-                        <div className="border-b border-slate-200 pb-6">
-                            <h2 className="text-lg font-semibold text-muted-foreground mb-6 pb-2 border-b-2 border-slate-300">
+                        <div className="border-b pb-6">
+                            <h2 className="text-lg font-semibold text-[#072DD0] mb-6 pb-2">
                                 Personal Information
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -256,8 +258,8 @@ export default function FacultyRegistration() {
                         </div>
 
                         {/* Professional Information Section */}
-                        <div className="border-b border-slate-200 pb-6">
-                            <h2 className="text-lg font-semibold text-muted-foreground mb-6 pb-2 border-b-2 border-slate-300">
+                        <div className="border-b pb-6">
+                            <h2 className="text-lg font-semibold text-[#072DD0] mb-6 pb-2">
                                 Professional Information
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -293,7 +295,7 @@ export default function FacultyRegistration() {
 
                         {/* Address Information Section */}
                         <div>
-                            <h2 className="text-lg font-semibold text-muted-foreground mb-6 pb-2 border-b-2 border-slate-300">
+                            <h2 className="text-lg font-semibold text-[#072DD0] mb-6 pb-2">
                                 Address Information
                             </h2>
                             <div className="space-y-6">
@@ -328,7 +330,7 @@ export default function FacultyRegistration() {
                         </div>
 
                         {/* Submit Button */}
-                        <div className="flex justify-end gap-4 pt-6 border-t border-slate-200">
+                        <div className="flex justify-end gap-4 pt-6 border-t">
                             <Button
                                 type="submit"
                                 disabled={loading}

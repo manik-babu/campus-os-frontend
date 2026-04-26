@@ -59,8 +59,10 @@ export default function AdminDashboardHero({ total }: { total: IAdminDashboardTo
         <div className="space-y-8">
             {/* Header Section */}
             <div className="py-8">
-                <h1 className="text-4xl font-bold text-slate-900 mb-2">Dashboard</h1>
-                <p className="text-slate-600">Welcome to your admin dashboard. {`Here's`} an overview of your institution.</p>
+                <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
+                <p className="text-muted-foreground">
+                    Welcome to your admin dashboard. {`Here's`} an overview of your institution.
+                </p>
             </div>
 
             {/* Stats Grid */}

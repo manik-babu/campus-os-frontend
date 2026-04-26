@@ -7,7 +7,7 @@ export function AdmissionFormCardSkeleton() {
             {
                 Array.from({ length: 10 }).map((_, index) => (
                     <Card key={index} className="flex flex-row items-center gap-4 p-4">
-                        <Skeleton className="w-25 h-25 rounded-md" />
+                        <Skeleton className="w-20 h-20 rounded-md" />
 
                         <section className="flex-1">
                             <Skeleton className="h-6 w-32 mb-2" />

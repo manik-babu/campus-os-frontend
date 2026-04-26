@@ -25,3 +25,15 @@ export interface ICourseOfferingInput {
     semesterId: string;
     creditFees: number;
 }
+export interface IMarkInput {
+    enrollmentId: string;
+    mark: Mark;
+}
+
+export interface Mark {
+    classTest1?: string | null;
+    classTest2?: string | null;
+    midterm?: string | null;
+    final?: string | null;
+    attendance?: string | null;
+}

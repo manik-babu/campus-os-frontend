@@ -21,6 +21,8 @@ import AddPost from "../facultyClass/AddPosts";
 import { IPostInput } from "@/@types/facultyClass";
 import PostCard from "./PostCard";
 import PostCardSkeleton from "@/components/skeletons/class/PostCardSkeleton";
+import { Button } from "@/components/ui/button";
+import { Meta } from "@/@types/admission";
 interface ClassRoomHomePageProps {
     posts: IClassPostData;
     user: ISessionUser;
@@ -40,11 +42,12 @@ export default function ClassRoomHomePage({ posts: initialPosts, user, classDeta
     const [type, setType] = useState<string>("ALL");
     const [orderBy, setOrderBy] = useState<string>("desc");
     const [loading, setLoading] = useState<boolean>(false);
+    const [paginating, setPaginating] = useState<boolean>(false);
 
-    const fetchPosts = async (page?: number) => {
+    const fetchPosts = async () => {
         setLoading(true);
         try {
-            const filter = { search, type, orderBy, page: page || 1 };
+            const filter = { search, type, orderBy, page: 1 };
             console.log({
                 filter
             })
@@ -59,6 +62,27 @@ export default function ClassRoomHomePage({ posts: initialPosts, user, classDeta
             toast.error(error.message || "An error occurred while fetching posts");
         } finally {
             setLoading(false);
+        }
+    }
+    const paginatePosts = async () => {
+        if (data.meta.page + 1 > data.meta.totalPages) return;
+        setPaginating(true);
+        try {
+            const filter = { search, type, orderBy, page: data.meta.page + 1 };
+            const res = await getClassPosts(classDetails.offeringId, filter);
+            if (res.ok && res.data) {
+                setData(prev => ({
+                    posts: [...prev.posts, ...(res.data?.posts as IClassPost[])],
+                    meta: res.data?.meta as Meta,
+                }));
+            } else {
+                toast.error(res.message || "Failed to fetch posts");
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            toast.error(error.message || "An error occurred while fetching posts");
+        } finally {
+            setPaginating(false);
         }
     }
     useEffect(() => {
@@ -85,6 +109,7 @@ export default function ClassRoomHomePage({ posts: initialPosts, user, classDeta
             toast.error(error.message || "An error occurred while adding the post");
         }
     };
+    const isLastPage = data.meta.totalPages <= data.meta.page;
     return (
         <div >
             <div className="border border-border rounded-lg bg-[#002fff0f] p-6">
@@ -158,7 +183,7 @@ export default function ClassRoomHomePage({ posts: initialPosts, user, classDeta
             {
                 user.role === UserRole.FACULTY && <AddPost classId={classDetails.offeringId} onPost={handlePost} />
             }
-            <div className="mt-6 space-y-4">
+            <div >
 
                 {
                     loading ?
@@ -169,9 +194,31 @@ export default function ClassRoomHomePage({ posts: initialPosts, user, classDeta
                                 No posts found.
                             </Card>
                         ) : (
-                            data.posts.map((post: IClassPost) => (
-                                <PostCard key={post.id} post={post} user={user} />
-                            ))
+                            <div className="mt-6 space-y-4">
+                                {
+                                    data.posts.map((post: IClassPost) => (
+                                        <PostCard key={post.id} post={post} user={user} />
+                                    ))
+                                }
+                                {
+                                    isLastPage ? (
+                                        <div className="text-center text-sm text-muted-foreground">
+                                            No more posts to load.
+                                        </div>
+                                    ) : (
+                                        paginating ? (
+                                            <PostCardSkeleton />
+                                        ) : (
+                                            <div className="flex justify-center my-8">
+                                                <Button variant="outline" onClick={paginatePosts} >
+                                                    Load More
+                                                </Button>
+                                            </div>
+                                        )
+
+                                    )
+                                }
+                            </div>
                         )
                 }
             </div>

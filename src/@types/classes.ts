@@ -33,6 +33,7 @@ export interface Author {
     name: string;
     idNo: string;
     role: string;
+    image: string;
 }
 export enum ClassPostType {
     ANNOUNCEMENT = "ANNOUNCEMENT",

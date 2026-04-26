@@ -67,6 +67,7 @@ export default function CommentSection({ post, user }: { post: IClassPost; user:
 
     return (
         <ScrollArea className="mt-4 h-dvh overflow-y-auto">
+            <AddPost classId={post.courseOfferingId} parentId={post.id} onPost={handleComment} />
             <RadioGroup onValueChange={(value) => {
                 setSort(value as "asc" | "desc");
                 fetchComments();
@@ -91,7 +92,6 @@ export default function CommentSection({ post, user }: { post: IClassPost; user:
                     </Field>
                 </FieldLabel>
             </RadioGroup>
-            <AddPost classId={post.courseOfferingId} parentId={post.id} onPost={handleComment} />
             <div className="mt-4 space-y-4">
                 {
                     loading ? (

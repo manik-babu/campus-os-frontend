@@ -118,7 +118,7 @@ export function MissionVision() {
                             </div>
 
                             {/* Heading */}
-                            <h3 className="text-3xl font-bold text-foreground mb-4 leading-tight" data-animatable="mission-title">
+                            <h3 className="text-3xl font-bold text-black mb-4 leading-tight" data-animatable="mission-title">
                                 Our Mission
                             </h3>
 
@@ -133,8 +133,8 @@ export function MissionVision() {
                             <div className="space-y-3" data-animatable="mission-points">
                                 {['Academic Excellence', 'Practical Experience', 'Global Perspective'].map((point, i) => (
                                     <div key={i} className="flex items-center gap-3">
-                                        <div className="flex-shrink-0 h-1.5 w-1.5 rounded-full bg-[#0052FF]" style={{ animationDelay: `${i * 0.1}s` }} />
-                                        <span className="text-sm font-medium text-foreground">{point}</span>
+                                        <div className="shrink-0 h-1.5 w-1.5 rounded-full bg-[#0052FF]" style={{ animationDelay: `${i * 0.1}s` }} />
+                                        <span className="text-sm font-medium text-muted-foreground">{point}</span>
                                     </div>
                                 ))}
                             </div>

@@ -8,6 +8,8 @@ import { useState } from "react";
 import CommentSection from "./CommentSection";
 import { cn } from "@/lib/utils";
 import { isTimePassed } from "@/utils/isTimePassed";
+import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function PostCard({ post, user, comments = "visible" }: { post: IClassPost, user: ISessionUser, comments?: "visible" | "hidden" }) {
     const [commentOpen, setCommentOpen] = useState<boolean>(false);
@@ -61,12 +63,12 @@ export default function PostCard({ post, user, comments = "visible" }: { post: I
             {/* Header Section */}
             <div className="flex items-start justify-between mb-4">
                 <div className="flex items-start gap-4 flex-1">
-                    {/* Author Avatar */}
-                    <div className="h-12 w-12 rounded-full bg-linear-to-br from-[#0052FF] to-[#4D7CFF] flex items-center justify-center flex-shrink-0">
-                        <span className="text-lg font-bold text-white">
-                            {post.author.name.charAt(0).toUpperCase()}
-                        </span>
-                    </div>
+                    <Avatar className="h-12 w-12 rounded-full border-4 border-background shadow-lg">
+                        <AvatarImage src={post.author.image ? post.author.image : `https://api.dicebear.com/7.x/initials/svg?seed=${post.author.name}`} />
+                        <AvatarFallback className="text-2xl font-bold">
+                            {post.author.name[0]}
+                        </AvatarFallback>
+                    </Avatar>
 
                     {/* Author Info */}
                     <div className="flex-1 min-w-0">

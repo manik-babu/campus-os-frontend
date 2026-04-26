@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { UserRole } from "@/@types/session";
 import { admitStudent, updateAdmissionFormStatus } from "@/services/admin.service";
 import { Spinner } from "@/components/ui/spinner";
+import { AlertDialog, AlertDialogContent, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -86,12 +87,13 @@ export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
             <div className="max-w-6xl mx-auto space-y-4">
                 {/* Header Section */}
                 <Card className="p-4">
-                    <h3>Personal Information</h3>
+                    <div>
+                        <h3 className="text-[#072DD0]">Personal Information</h3>
+                    </div>
                     <div className="px-8 pb-8">
-
-                        <div className="flex gap-8 -mt-16 mb-8">
+                        <div className="flex gap-8 mb-8">
                             {/* Student Image */}
-                            <div className="relative w-32 h-40 rounded-lg border-4 border-white shadow-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                            <div onClick={() => setSelectedImage(form.image)} className="cursor-pointer relative w-32 h-40 rounded-lg border-4 border-white shadow-lg overflow-hidden bg-gray-100 shrink-0">
                                 <Image
                                     src={form.image}
                                     alt={form.name}
@@ -102,19 +104,19 @@ export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
 
                             {/* Basic Info */}
                             <div className="flex-1 pt-4">
-                                <h2 className="text-3xl font-bold text-gray-900 mb-2">{form.name}</h2>
+                                <h2 className="text-3xl font-bold mb-2">{form.name}</h2>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                                     <div>
                                         <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">Program</p>
-                                        <p className="text-sm font-semibold text-gray-900">{form.program}</p>
+                                        <p className="text-sm font-semibold">{form.program}</p>
                                     </div>
                                     <div>
                                         <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">Department</p>
-                                        <p className="text-sm font-semibold text-gray-900">{form.department}</p>
+                                        <p className="text-sm font-semibold">{form.department}</p>
                                     </div>
                                     <div>
                                         <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">Applied Date</p>
-                                        <p className="text-sm font-semibold text-gray-900">{formattedDate(form.createdAt)}</p>
+                                        <p className="text-sm font-semibold">{formattedDate(form.createdAt)}</p>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +126,7 @@ export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
 
                 {/* Academic Information Section */}
                 <Card className="p-4">
-                    <h3>Academic Information</h3>
+                    <h3 className="text-[#072DD0]">Academic Information</h3>
                     <div>
                         <div className="grid md:grid-cols-2 gap-8">
                             <div>
@@ -146,7 +148,7 @@ export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
                 {/* Personal Information Section */}
                 <Card className="p-4">
                     <div>
-                        <h3>Personal Information</h3>
+                        <h3 className="text-[#072DD0]">Personal Information</h3>
                     </div>
                     <div>
                         <div className="grid md:grid-cols-2 gap-8">
@@ -169,14 +171,14 @@ export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
                 {/* Documents Section */}
                 <Card className="p-4">
                     <div>
-                        <h3 className="text-[#072DD0]!">Education Documents</h3>
+                        <h3 className="text-[#072DD0]">Education Documents</h3>
                     </div>
-                    <div className="px-8 py-8">
+                    <div>
                         <div className="flex flex-wrap gap-12 justify-start">
                             <DocumentThumbnail setSelectedImage={setSelectedImage} label="SSC Certificate" src={form.sscDoc} />
                             <DocumentThumbnail setSelectedImage={setSelectedImage} label="HSC Certificate" src={form.hscDoc} />
                         </div>
-                        <p className="text-xs text-gray-500 mt-6">
+                        <p className="text-xs mt-6">
                             💡 Click on any document thumbnail to view in full screen
                         </p>
                     </div>
@@ -190,15 +192,39 @@ export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
                     </Button>
                     <p className="text-muted-foreground">Admit student to last batch: <span className="text-purple-600">batch {form.batchNo}</span></p>
                 </div>
+                <AlertDialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+                    <AlertDialogTitle ></AlertDialogTitle>
+                    <AlertDialogContent className="bg-transparent shadow-none border-0 p-0">
+                        {
+                            selectedImage && (
+                                <div className="relative w-full h-[90dvh]">
+                                    <Image
+                                        src={selectedImage}
+                                        alt="Document Preview"
+                                        fill
+                                        className="object-contain rounded-lg shadow-lg"
+                                    />
+                                    <Button
+                                        variant={"outline"}
+                                        onClick={() => setSelectedImage(null)}
+                                        className="absolute top-2 right-2 "
+                                    >
+                                        <X size={20} />
+                                    </Button>
+                                </div>
+                            )
+                        }
+                    </AlertDialogContent>
+                </AlertDialog>
             </div>
         </div>
     );
 }
 
 const InfoRow = ({ label, value }: { label: string; value: string | number | null }) => (
-    <div className="grid grid-cols-2 gap-4 py-3 border-b border-gray-100 last:border-b-0">
-        <div className="text-sm font-medium text-gray-600">{label}</div>
-        <div className="text-sm text-gray-900 font-semibold">
+    <div className="grid grid-cols-2 gap-4 py-3 border-b last:border-b-0">
+        <div className="text-sm font-medium">{label}</div>
+        <div className="text-sm font-semibold">
             {value && value !== "null" ? String(value) : "N/A"}
         </div>
     </div>
@@ -207,7 +233,7 @@ const DocumentThumbnail = ({ label, src, setSelectedImage }: { label: string; sr
     <div className="flex flex-col items-center gap-2">
         <button
             onClick={() => setSelectedImage(src)}
-            className="relative w-32 h-40 border-2 border-gray-200 rounded-lg overflow-hidden hover:border-blue-500 transition-colors duration-200 bg-gray-50 hover:shadow-lg"
+            className="relative cursor-pointer w-32 h-40 border-2 border-gray-200 rounded-lg overflow-hidden hover:border-blue-500 transition-colors duration-200 bg-gray-50 hover:shadow-lg"
         >
             <Image
                 src={src}
@@ -216,6 +242,6 @@ const DocumentThumbnail = ({ label, src, setSelectedImage }: { label: string; sr
                 className="object-cover"
             />
         </button>
-        <span className="text-xs font-medium text-gray-600">{label}</span>
+        <span className="text-xs font-medium">{label}</span>
     </div>
 );

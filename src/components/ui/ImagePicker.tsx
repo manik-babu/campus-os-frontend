@@ -10,7 +10,7 @@ export default function ImagePicker({ image, setImage, error }: { error: string 
             <div>
                 {image ? (
                     <div className="relative flex justify-center items-center w-fit">
-                        <Button variant="destructive" className="absolute -top-2 -right-2" onClick={(e) => {
+                        <Button variant="destructive" className="absolute" onClick={(e) => {
                             e.stopPropagation();
                             setImage(null);
                         }}>
