@@ -125,7 +125,7 @@ export default function ViewStudentAttendance() {
                                                 record.attendance.map((status, index) => (
                                                     <TableCell key={index} className="text-center text-muted-foreground">
                                                         {
-                                                            status ? "P" : "A"
+                                                            status ? <span className="bg-green-100 text-green-800 px-2 py-1 rounded">P</span> : <span className="bg-red-100 text-red-800 px-2 py-1 rounded">A</span>
                                                         }
                                                     </TableCell>
                                                 ))

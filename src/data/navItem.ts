@@ -65,11 +65,11 @@ const adminNavItems: INavSection[] = [
 const facultyNavItems: INavSection[] = [
     {
         items: [
-            {
-                title: "Dashboard",
-                href: "/faculty/dashboard",
-                icon: "LayoutDashboard",
-            },
+            // {
+            //     title: "Dashboard",
+            //     href: "/faculty/dashboard",
+            //     icon: "LayoutDashboard",
+            // },
             {
                 title: "My Profile",
                 href: "/cmn/profile",

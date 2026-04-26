@@ -50,9 +50,12 @@ export function LoginForm({
           return;
         }
         await setCookie("token", res.data?.token as string);
-        if (res.data?.user.role != UserRole.SUPER_ADMIN) {
+        if (res.data?.user.role == UserRole.STUDENT || res.data?.user.role == UserRole.ADMIN) {
           const role = res.data?.user.role.toLowerCase();
-          router.push(`/${role}/dashboard`);
+          router.push(`/${role}/dashboard`)
+        }
+        else if (res.data?.user.role == UserRole.FACULTY) {
+          router.push(`/faculty/classes`);
         }
         else {
           router.push(`/super-admin/dashboard`);
