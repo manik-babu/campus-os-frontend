@@ -12,3 +12,19 @@ export interface IAdminRegistrationData {
     presentAddress: string;
     permanentAddress: string;
 }
+
+export interface ISuperAdminDashboardData {
+    total: ISuperAdminTotalUserData;
+    departments: Department[];
+}
+export interface ISuperAdminTotalUserData {
+    totalPrograms: number;
+    totalDepartments: number;
+    totalStudents: number;
+    totalFaculties: number;
+    totalAdmins: number;
+}
+export interface Department {
+    name: string;
+    studentCount: number;
+}

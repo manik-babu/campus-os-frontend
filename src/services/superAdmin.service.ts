@@ -4,7 +4,7 @@
 import { ICreatedFaculty } from "@/@types/admin";
 import { IRegisterUserData } from "@/@types/admission";
 import { IApiResponse } from "@/@types/axios";
-import { IAdminRegistrationData, IDepartment } from "@/@types/superAdmin";
+import { IAdminRegistrationData, IDepartment, ISuperAdminDashboardData } from "@/@types/superAdmin";
 import { httpClient } from "@/lib/axios/httpClient";
 import { AdminRegistrationData } from "@/zod/adminRegistration";
 import { DepartmentFormData } from "@/zod/superAdmin/department";
@@ -75,6 +75,18 @@ export const registerAdmin = async (image: File, userData: IRegisterUserData, pr
         return {
             ok: false,
             message: error.message || "Failed to register admin",
+        }
+    }
+}
+
+export const getSuperAdminDashboardData = async (): Promise<IApiResponse<ISuperAdminDashboardData>> => {
+    try {
+        const res = await httpClient.get<ISuperAdminDashboardData>("/super-admin/dashboard-data");
+        return res;
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to fetch dashboard data",
         }
     }
 }
