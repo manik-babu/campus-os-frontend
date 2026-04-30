@@ -11,6 +11,8 @@ import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import BillTable from "./billTable";
 import StudentBillSkeleton from "@/components/skeletons/bills/BillPageSkeleton";
+import { Card } from "@/components/ui/card";
+import PaymentCard from "./PaymentCard";
 export default function StudentBills() {
     const [selectedSemesterId, setSelectedSemesterId] = useState<string>("");
 
@@ -43,9 +45,6 @@ export default function StudentBills() {
             setBill(null);
             return;
         }
-        console.log({
-            semesterId
-        })
         try {
             setIsLoading(true);
             const res = await getBills(semesterId);
@@ -139,6 +138,17 @@ export default function StudentBills() {
                         )
                 }
 
+            </div>
+            <div className="space-y-4">
+                {/* Payment History */}
+                <h2>Payments</h2>
+                <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {
+                        bill?.payments.map((payment, id) => (
+                            <PaymentCard key={id} payment={payment} billId={bill?.id || ""} />
+                        ))
+                    }
+                </section>
             </div>
         </div>
     );

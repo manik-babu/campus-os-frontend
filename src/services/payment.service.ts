@@ -17,3 +17,16 @@ export const getBills = async (semesterId: string): Promise<IApiResponse<IBillDe
         }
     }
 }
+
+export const makePayment = async ({ billId, amount, billName }: { billId: string; amount: number; billName: string }): Promise<IApiResponse<{ url: string }>> => {
+    try {
+        const res = await httpClient.post<{ url: string }>(`/payment/create-payment`, { amount, billId, billName });
+        return res;
+    } catch (error: any) {
+        console.log("Failed to make payment");
+        return {
+            ok: false,
+            message: error.message || "An error occurred while making payment",
+        }
+    }
+}

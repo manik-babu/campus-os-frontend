@@ -14,9 +14,8 @@ export interface IBillItem {
     totalAmount: string;
 }
 export interface IPayments {
-    id: string;
+    name: string;
     amount: string;
-    transactionId: string;
-    createdAt: string;
-    status: string;
+    isPaid: boolean;
+    isDisabled: boolean;
 }
