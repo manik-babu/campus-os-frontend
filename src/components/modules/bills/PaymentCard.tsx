@@ -19,12 +19,10 @@ export default function PaymentCard({ payment, billId }: { payment: IPayments; b
                 amount: parseFloat(payment.amount),
                 billName: payment.name
             }
-            console.table(data)
             const res = await makePayment(data);
             if (res.ok && res.data) {
                 window.location.assign(res.data.url)
             }
-            toast.success("Payment successful!");
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             toast.error(error.message || "Failed to make payment");

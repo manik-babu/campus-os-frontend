@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
+import { IAdmissionFormResponse } from "@/@types/admission";
 import { IApiResponse } from "@/@types/axios";
 import { IPrograms } from "@/@types/programs";
 import { IFacultyShort } from "@/@types/public";
@@ -44,6 +45,37 @@ export const getPrograms = async (): Promise<IApiResponse<IPrograms[]>> => {
         return {
             ok: false,
             message: error.message || "Failed to fetch programs",
+        }
+    }
+}
+
+export const submitAdmissionForm = async (data: FormData): Promise<IApiResponse<IAdmissionFormResponse>> => {
+    try {
+        const res = await httpClient.post<IAdmissionFormResponse>("/public/admission-form", data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        return res;
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to submit admission form",
+        }
+    }
+}
+
+export const admissionPayment = async (amount: number, admissionFormId: string): Promise<IApiResponse<{ url: string }>> => {
+    try {
+        const res = await httpClient.post<{ url: string }>("/payment/admission-payment", {
+            amount,
+            admissionFormId
+        });
+        return res;
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to initiate payment",
         }
     }
 }

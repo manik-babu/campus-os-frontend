@@ -81,9 +81,6 @@ export function AboutHero() {
                     {/* CTA Buttons */}
                     <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 about-hero-buttons">
                         <button className="btn-primary">Explore Programs</button>
-                        <Button variant={"outline"} className='h-12 px-8'>
-                            Our Campus Tour
-                        </Button>
                     </div>
                 </div>
             </div>

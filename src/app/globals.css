@@ -224,17 +224,17 @@ h3 {
 
 /* Primary Button */
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0052FF] bg-linear-to-r from-[#0052FF] to-[#4D7CFF] text-white hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#0052FF]/35 active:scale-95;
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0052FF] bg-linear-to-r from-[#0052FF] to-[#4D7CFF] text-white hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#0052FF]/35 active:scale-95;
 }
 
 /* Secondary Button */
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0052FF] border border-[#E2E8F0] text-[#0F172A] hover:border-[#0052FF]/30 hover:bg-[#F1F5F9] hover:shadow-md;
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0052FF] border border-[#E2E8F0] text-[#0F172A] hover:border-[#0052FF]/30 hover:bg-[#F1F5F9] hover:shadow-md;
 }
 
 /* Ghost Button */
 .btn-ghost {
-  @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0052FF] text-[#0052FF] hover:bg-[#0052FF]/5;
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-6 py-3 font-medium transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0052FF] text-[#0052FF] hover:bg-[#0052FF]/5;
 }
 
 /* Responsive Typography */

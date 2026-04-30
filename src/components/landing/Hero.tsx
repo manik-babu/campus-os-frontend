@@ -5,6 +5,7 @@ import gsap from "gsap"
 import { useGSAP } from '@gsap/react';
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import { useRouter } from 'next/navigation';
 interface HeroProps {
     title?: string;
     subtitle?: string;
@@ -15,9 +16,10 @@ interface HeroProps {
 export function Hero({
     title = "Welcome to Uttara University",
     subtitle = 'Empowering minds. Shaping futures. Building excellence through innovative education and global perspectives.',
-    ctaText = 'Explore Programs',
+    ctaText = 'Apply Now',
     ctaSecondaryText = 'Learn More',
 }: HeroProps) {
+    const router = useRouter();
 
     useGSAP(() => {
         gsap.from(".hero-text", {
@@ -68,18 +70,18 @@ export function Hero({
 
                         {/* CTAs */}
                         <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 pt-4 hero-text">
-                            <button className="btn-primary group">
+                            <button onClick={() => router.push("/admission")} className="btn-primary group">
                                 {ctaText}
                                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
-                            <Link href={"/about"}>
+                            {/* <Link href={"/about"}>
                                 <Button variant={"outline"} className='h-12 px-8'>
                                     {ctaSecondaryText}
                                 </Button>
-                            </Link>
-                            {/* <button className="btn-secondary">
+                            </Link> */}
+                            <button onClick={() => router.push("/about")} className="btn-secondary border-[#0052FF]/30 bg-[#F1F5F9]">
                                 {ctaSecondaryText}
-                            </button> */}
+                            </button>
                         </div>
 
                         {/* Trust Indicators */}

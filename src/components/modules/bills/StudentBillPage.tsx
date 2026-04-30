@@ -48,7 +48,6 @@ export default function StudentBills() {
         try {
             setIsLoading(true);
             const res = await getBills(semesterId);
-            console.log(res);
             if (!res.ok) {
                 toast.error(res.message || "Failed to fetch bills");
                 setBill(null);

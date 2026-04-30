@@ -32,9 +32,13 @@ export const addDepartment = async (data: DepartmentFormData): Promise<IApiRespo
         }
     }
 }
-export const getDepartments = async (): Promise<IApiResponse<IDepartment[]>> => {
+export const getDepartments = async (programId?: string): Promise<IApiResponse<IDepartment[]>> => {
     try {
-        const res = await httpClient.get<IDepartment[]>("/public/departments");
+        const res = await httpClient.get<IDepartment[]>("/public/departments", {
+            params: {
+                programId: programId
+            }
+        });
         return res;
     } catch (error: any) {
         return {

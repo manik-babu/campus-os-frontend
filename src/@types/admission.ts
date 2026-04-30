@@ -72,3 +72,12 @@ export interface IRegisterUserData {
     role: string;
     gender: string;
 }
+export interface IAdmissionFormResponse {
+    id: string;
+    name: string;
+    email: string;
+    department: string;
+    program: string;
+    isPaidFee: boolean;
+    fee: number;
+}

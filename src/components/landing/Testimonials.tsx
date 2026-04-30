@@ -99,14 +99,6 @@ export function Testimonials() {
                         <TestimonialCard key={index} {...testimonial} />
                     ))}
                 </div>
-
-                {/* Bottom CTA */}
-                <div className="mt-16 text-center">
-                    <p className="text-muted-foreground mb-6">
-                        Ready to write your success story? Join thousands of Uttara University graduates thriving worldwide.
-                    </p>
-                    <button className="btn-primary">Start Your Journey</button>
-                </div>
             </div>
         </section>
     );

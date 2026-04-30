@@ -8,6 +8,7 @@ import {
   Testimonials,
   CallToAction,
 } from '@/components/landing';
+import CallToActionSimple from '@/components/landing/CallToActionSimple';
 
 export default function Home() {
   return (
@@ -17,7 +18,8 @@ export default function Home() {
       <Programs />
       <Features />
       <Testimonials />
-      <CallToAction />
+      <CallToActionSimple />
+      {/* <CallToAction /> */}
     </div>
   );
 }

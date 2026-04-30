@@ -39,8 +39,8 @@ function ProgramCard({ icon, title, description, degree, duration, className }: 
             </div>
 
             {/* CTA */}
-            <button className="mt-2 inline-flex items-center gap-2 text-[#0052FF] text-sm font-medium transition-transform group-hover/card:translate-x-1">
-                Learn More →
+            <button className="mt-2 inline-flex cursor-pointer hover:underline items-center gap-2 text-[#0052FF] text-sm font-medium transition-transform group-hover/card:translate-x-1">
+                Apply now →
             </button>
         </div>
     );
@@ -156,15 +156,6 @@ export function Programs() {
                             <ProgramCard key={index} {...program} />
                         </div>
                     ))}
-                </div>
-
-                {/* CTA */}
-                <div id='consultation' className="mt-16 rounded-2xl border border-[#0052FF]/20 bg-[#0052FF]/5 p-8 text-center">
-                    <h3 className=" text-2xl font-semibold text-foreground mb-3">Still deciding?</h3>
-                    <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                        Our academic advisors are here to help you find the perfect program that matches your goals and aspirations.
-                    </p>
-                    <button className="btn-primary">Schedule a Consultation</button>
                 </div>
             </div>
         </section>
