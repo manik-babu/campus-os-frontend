@@ -1,6 +1,7 @@
 'use client';
 // Facebook, Twitter, Linkedin, Instagram,
 import { Mail, MapPin, Phone } from 'lucide-react';
+import Link from 'next/link';
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
@@ -43,11 +44,11 @@ export function Footer() {
                     <div>
                         <h4 className="font-semibold text-white mb-4">Quick Links</h4>
                         <ul className="space-y-3">
-                            {['About Us', 'Programs', 'Admissions', 'Faculty', 'Alumni'].map((link) => (
-                                <li key={link}>
-                                    <a href="#" className="text-sm text-white/70 hover:text-white transition-colors">
-                                        {link}
-                                    </a>
+                            {[['About Us', 'about'], ['Programs', 'programs'], ['Admissions', 'admissions']].map((link) => (
+                                <li key={link[1]}>
+                                    <Link href={link[1]} className="text-sm text-white/70 hover:text-white transition-colors">
+                                        {link[0]}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -57,11 +58,21 @@ export function Footer() {
                     <div>
                         <h4 className="font-semibold text-white mb-4">Resources</h4>
                         <ul className="space-y-3">
-                            {['News & Events', 'Library', 'Student Portal', 'Careers', 'Support'].map((link) => (
-                                <li key={link}>
-                                    <a href="#" className="text-sm text-white/70 hover:text-white transition-colors">
-                                        {link}
-                                    </a>
+                            {[['Student Portal', 'erp-login'], ['Careers', 'careers'], ['Support', 'support']].map((link) => (
+                                <li key={link[1]}>
+                                    {
+                                        link[1] !== 'erp-login' ? (
+                                            <span
+                                                className="text-sm text-white/70 hover:text-white transition-colors"
+                                            >
+                                                {link[0]}
+                                            </span>
+                                        ) : (
+                                            <Link href={link[1]} className="text-sm text-white/70 hover:text-white transition-colors">
+                                                {link[0]}
+                                            </Link>
+                                        )
+                                    }
                                 </li>
                             ))}
                         </ul>
@@ -71,14 +82,14 @@ export function Footer() {
                     <div>
                         <h4 className="font-semibold text-white mb-4">Contact</h4>
                         <div className="space-y-3">
-                            <a href="tel:+880" className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+                            <span className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
                                 <Phone className="h-4 w-4" />
                                 <span>+880 XX XXXX XXXX</span>
-                            </a>
-                            <a href="mailto:info@uttarauniversity.edu" className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+                            </span>
+                            <span className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
                                 <Mail className="h-4 w-4" />
                                 <span>info@uttarauniversity.edu</span>
-                            </a>
+                            </span>
                             <div className="flex items-start gap-2 text-sm text-white/70">
                                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                                 <span>Uttara, Dhaka<br />Bangladesh</span>
@@ -94,15 +105,15 @@ export function Footer() {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/60">
                     <p>© {currentYear} Uttara University. All rights reserved.</p>
                     <div className="flex gap-6">
-                        <a href="#" className="hover:text-white transition-colors">
+                        <Link href="#" className="hover:text-white transition-colors">
                             Privacy Policy
-                        </a>
-                        <a href="#" className="hover:text-white transition-colors">
+                        </Link>
+                        <Link href="#" className="hover:text-white transition-colors">
                             Terms of Service
-                        </a>
-                        <a href="#" className="hover:text-white transition-colors">
+                        </Link>
+                        <Link href="#" className="hover:text-white transition-colors">
                             Cookie Settings
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

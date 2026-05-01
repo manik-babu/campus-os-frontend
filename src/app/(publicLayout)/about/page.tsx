@@ -32,9 +32,9 @@ export default function About() {
             <AboutHero />
             <MissionVision />
             <History />
-            <Achievements />
+            {/* <Achievements /> */}
             <OurStrengths />
-            <GlobalReach />
+            {/* <GlobalReach /> */}
         </div>
     );
 }

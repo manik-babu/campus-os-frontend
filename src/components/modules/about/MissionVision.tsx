@@ -48,6 +48,16 @@ export function MissionVision() {
                 start: "top 80%",
             },
         });
+        gsap.from("#bottom-callout", {
+            opacity: 0,
+            y: 20,
+            duration: 0.5,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: "#bottom-callout",
+                start: "top 80%",
+            },
+        });
 
 
 
@@ -57,12 +67,12 @@ export function MissionVision() {
         <section className="section-py bg-background relative overflow-hidden">
             {/* Background Elements for Animation */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {/* Animated gradient blob 1 */}
-                <div className="absolute -right-96 -top-96 h-96 w-96 rounded-full bg-gradient-to-br from-[#0052FF]/10 to-transparent blur-3xl opacity-60"
+                {/* Animated linear blob 1 */}
+                <div className="absolute -right-96 -top-96 h-96 w-96 rounded-full bg-linear-to-br from-[#0052FF]/10 to-transparent blur-3xl opacity-60"
                     data-animatable="blob-1" />
 
-                {/* Animated gradient blob 2 */}
-                <div className="absolute -left-96 -bottom-96 h-96 w-96 rounded-full bg-gradient-to-tr from-[#4D7CFF]/10 to-transparent blur-3xl opacity-60"
+                {/* Animated linear blob 2 */}
+                <div className="absolute -left-96 -bottom-96 h-96 w-96 rounded-full bg-linear-to-tr from-[#4D7CFF]/10 to-transparent blur-3xl opacity-60"
                     data-animatable="blob-2" />
 
                 {/* Decorative grid lines */}
@@ -86,7 +96,7 @@ export function MissionVision() {
                     <h2 className="text-foreground font-fancy mb-2 mission-text" data-animatable="heading">
                         Mission &amp; Vision
                     </h2>
-                    <div className="h-1 w-full mission-line bg-gradient-to-r from-[#0052FF] to-[#4D7CFF] rounded-full"
+                    <div className="h-1 w-full mission-line bg-linear-to-r from-[#0052FF] to-[#4D7CFF] rounded-full"
                         data-animatable="line" />
                 </div>
 
@@ -98,18 +108,18 @@ export function MissionVision() {
                         data-animatable="mission-card"
                     >
                         {/* Background layers */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white to-[#F1F5F9] z-0" />
+                        <div className="absolute inset-0 bg-linear-to-br from-white to-[#F1F5F9] z-0" />
                         <div className="absolute inset-0 border-2 border-[#0052FF]/20 rounded-3xl z-0" />
 
                         {/* Animated accent bar */}
-                        <div className="absolute top-0 left-0 h-1.5 w-0 bg-gradient-to-r from-[#0052FF] to-[#4D7CFF]"
+                        <div className="absolute top-0 left-0 h-1.5 w-0 bg-linear-to-r from-[#0052FF] to-[#4D7CFF]"
                             data-animatable="accent-bar-m" />
 
                         {/* Content */}
                         <div className="relative z-10">
                             {/* Icon Container */}
                             <div
-                                className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0052FF] to-[#4D7CFF] text-white mb-6 shadow-lg shadow-[#0052FF]/20 group-hover:scale-110 transition-transform duration-300"
+                                className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-[#0052FF] to-[#4D7CFF] text-white mb-6 shadow-lg shadow-[#0052FF]/20 group-hover:scale-110 transition-transform duration-300"
                                 data-animatable="mission-icon"
                             >
                                 <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -147,18 +157,18 @@ export function MissionVision() {
                         data-animatable="vision-card"
                     >
                         {/* Background layers */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#0052FF]/5 to-[#4D7CFF]/5 z-0" />
+                        <div className="absolute inset-0 bg-linear-to-br from-[#0052FF]/5 to-[#4D7CFF]/5 z-0" />
                         <div className="absolute inset-0 border-2 border-[#0052FF]/30 rounded-3xl z-0" />
 
                         {/* Animated accent bar */}
-                        <div className="absolute top-0 right-0 h-1.5 w-0 bg-gradient-to-l from-[#0052FF] to-[#4D7CFF]"
+                        <div className="absolute top-0 right-0 h-1.5 w-0 bg-linear-to-l from-[#0052FF] to-[#4D7CFF]"
                             data-animatable="accent-bar-v" />
 
                         {/* Content */}
                         <div className="relative z-10">
                             {/* Icon Container */}
                             <div
-                                className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#4D7CFF] to-[#0052FF] text-white mb-6 shadow-lg shadow-[#4D7CFF]/20 group-hover:scale-110 transition-transform duration-300"
+                                className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-[#4D7CFF] to-[#0052FF] text-white mb-6 shadow-lg shadow-[#4D7CFF]/20 group-hover:scale-110 transition-transform duration-300"
                                 data-animatable="vision-icon"
                             >
                                 <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -191,62 +201,8 @@ export function MissionVision() {
                     </div>
                 </div>
 
-                {/* Core Values Section */}
-                <div className="mt-24 relative">
-                    {/* Divider */}
-                    <div className="flex items-center gap-4 mb-16">
-                        <div className="flex-1 h-px bg-gradient-to-r from-[#0052FF]/50 to-transparent" />
-                        <p className="text-sm font-mono uppercase tracking-widest text-muted-foreground">Core Values</p>
-                        <div className="flex-1 h-px bg-gradient-to-l from-[#0052FF]/50 to-transparent" />
-                    </div>
-
-                    {/* Values Grid */}
-                    <div id='value-container' className="grid relative gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                        {coreValues.map((value, index) => (
-                            <div
-                                key={index}
-                                className="baal group relative rounded-2xl border border-border bg-card p-6 shadow-sm hover:shadow-lg hover:shadow-[#0052FF]/10 transition-all duration-300 hover:-translate-y-1 overflow-hidden"
-                            >
-                                {/* Hover background effect */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#0052FF]/0 to-[#4D7CFF]/0 group-hover:from-[#0052FF]/5 group-hover:to-[#4D7CFF]/5 transition-all duration-300 z-0" />
-
-                                {/* Content */}
-                                <div className="relative z-10">
-                                    {/* Icon */}
-                                    <div
-                                        className="text-4xl mb-4 transform group-hover:scale-125 transition-transform duration-300"
-                                        data-animatable={`value-icon-${index}`}
-                                    >
-                                        {value.icon}
-                                    </div>
-
-                                    {/* Title */}
-                                    <h4 className="text-lg font-bold text-foreground mb-3">{value.title}</h4>
-
-                                    {/* Description */}
-                                    <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
-
-                                    {/* Animated dot indicator */}
-                                    <div className="mt-4 flex gap-1">
-                                        {[0, 1, 2].map((dot) => (
-                                            <div
-                                                key={dot}
-                                                className="h-1 w-1 rounded-full bg-[#0052FF]"
-                                                style={{
-                                                    opacity: 0.3 + (dot * 0.25),
-                                                }}
-                                                data-animatable={`dot-${index}-${dot}`}
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
                 {/* Bottom Callout */}
-                <div className="mt-20 rounded-3xl border-2 border-[#0052FF]/20 bg-gradient-to-br from-[#0052FF]/5 via-background to-[#4D7CFF]/5 p-8 md:p-12 text-center overflow-hidden relative"
+                <div id='bottom-callout' className="mt-20 rounded-3xl border-2 border-[#0052FF]/20 bg-linear-to-br from-[#0052FF]/5 via-background to-[#4D7CFF]/5 p-8 md:p-12 text-center overflow-hidden relative"
                     data-animatable="callout"
                 >
                     {/* Decorative background elements */}

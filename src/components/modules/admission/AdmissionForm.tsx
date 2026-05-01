@@ -3,7 +3,6 @@
 import { IPrograms } from "@/@types/programs";
 import { IDepartment } from "@/@types/superAdmin";
 import AppField from "@/components/shared/AppField";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -14,8 +13,9 @@ import { AdmissionFormZodSchema, AdmissionUserGender } from "@/zod/admissionForm
 import { useForm } from "@tanstack/react-form";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Loader2, FileUp } from "lucide-react";
+import { FileUp } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function AdmissionForm() {
     const router = useRouter();
@@ -147,7 +147,7 @@ export default function AdmissionForm() {
 
     return (
 
-        <div className="space-y-8 pb-8 p-4">
+        <div className="space-y-8 pb-8 p-4 mt-16">
             {/* Header Section */}
             <div className="space-y-2">
                 <h1 className="text-3xl font-bold text-foreground font-fancy">University Admission Form</h1>
@@ -561,20 +561,20 @@ export default function AdmissionForm() {
 
                     {/* Submit Section */}
                     <div className="flex gap-4 justify-end pt-4">
-                        <Button
+                        <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="gap-2"
+                            className="gap-2 btn-primary"
                         >
                             {isSubmitting ? (
                                 <>
-                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                    <Spinner />
                                     Submitting...
                                 </>
                             ) : (
                                 "Submit Application"
                             )}
-                        </Button>
+                        </button>
                     </div>
                 </div>
             </form>

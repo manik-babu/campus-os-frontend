@@ -1,11 +1,11 @@
 'use client';
-
-import { Button } from '@/components/ui/button';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRouter } from 'next/navigation';
 
 export function AboutHero() {
+    const router = useRouter();
     gsap.registerPlugin(ScrollTrigger);
     useGSAP(() => {
         const tl = gsap.timeline();
@@ -80,7 +80,7 @@ export function AboutHero() {
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 about-hero-buttons">
-                        <button className="btn-primary">Explore Programs</button>
+                        <button onClick={() => router.push("/programs")} className="btn-primary">Explore Programs</button>
                     </div>
                 </div>
             </div>

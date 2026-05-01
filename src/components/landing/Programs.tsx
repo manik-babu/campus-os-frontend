@@ -39,8 +39,8 @@ function ProgramCard({ icon, title, description, degree, duration, className }: 
             </div>
 
             {/* CTA */}
-            <button className="mt-2 inline-flex cursor-pointer hover:underline items-center gap-2 text-[#0052FF] text-sm font-medium transition-transform group-hover/card:translate-x-1">
-                Apply now →
+            <button className="mt-2 inline-flex cursor-pointer items-center gap-2 text-[#0052FF] text-sm font-medium transition-transform group-hover/card:translate-x-1">
+                Learn more →
             </button>
         </div>
     );

@@ -16,7 +16,8 @@ import {
 } from "lucide-react";
 
 export default function PaymentStatus() {
-    const params = useSearchParams();
+    const searchParams = useSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
     const router = useRouter();
     const success = params.get("success");
     const [isCleared, setIsCleared] = useState(false);

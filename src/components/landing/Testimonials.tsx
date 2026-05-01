@@ -1,5 +1,9 @@
 'use client';
 
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 interface TestimonialProps {
     quote: string;
     author: string;
@@ -8,6 +12,7 @@ interface TestimonialProps {
 }
 
 function TestimonialCard({ quote, author, role, program }: TestimonialProps) {
+
     return (
         <div className="rounded-2xl border border-border bg-card p-8 shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-[#0052FF]/10">
             {/* Quote Mark */}
@@ -76,18 +81,47 @@ export function Testimonials() {
             program: 'B.B.A Entrepreneurship',
         },
     ];
+    gsap.registerPlugin(ScrollTrigger);
+    useGSAP(() => {
+        gsap.from(`.tes-text`, {
+            opacity: 0,
+            y: 20,
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: `.tes-text`,
+                start: "top 80%",
+                markers: false,
+            }
+        });
+
+        gsap.from(`.tes-card`, {
+            opacity: 0,
+            y: 20,
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: `.tes-card`,
+                start: "top 70%",
+                markers: false,
+
+            }
+        });
+    })
 
     return (
         <section className="section-py bg-background">
             <div className="container-landing">
                 {/* Section Header */}
                 <div className="mb-16 max-w-3xl">
-                    <div className="section-label mb-6">
+                    <div className="section-label mb-6 tes-text">
                         <div className="section-label-dot" />
                         <span className="section-label-text">Student Stories</span>
                     </div>
-                    <h2 className="font-fancy text-foreground mb-4">Hear from Our Alumni</h2>
-                    <p className="text-lg text-muted-foreground">
+                    <h2 className="font-fancy text-foreground mb-4 tes-text">Hear from Our Alumni</h2>
+                    <p className="text-lg text-muted-foreground tes-text">
                         Real stories from students who transformed their futures at Uttara University. Their success is our
                         pride.
                     </p>
@@ -96,7 +130,9 @@ export function Testimonials() {
                 {/* Testimonials Grid */}
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {testimonials.map((testimonial, index) => (
-                        <TestimonialCard key={index} {...testimonial} />
+                        <div key={index} className="tes-card">
+                            <TestimonialCard  {...testimonial} />
+                        </div>
                     ))}
                 </div>
             </div>
