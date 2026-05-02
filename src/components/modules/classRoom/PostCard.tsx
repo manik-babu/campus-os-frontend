@@ -3,15 +3,27 @@
 import { IClassPost, ClassPostType } from "@/@types/classes";
 import { ISessionUser } from "@/@types/session";
 import { Badge } from "@/components/ui/badge";
-import { MessageSquare, BookOpen, FileText, Megaphone, MessageCircle } from "lucide-react";
+import { MessageSquare, BookOpen, FileText, Megaphone, MessageCircle, EllipsisVertical, Pen, Trash2 } from "lucide-react";
 import { useState } from "react";
 import CommentSection from "./CommentSection";
 import { cn } from "@/lib/utils";
 import { isTimePassed } from "@/utils/isTimePassed";
-import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { toast } from "sonner";
+import { deleteCoursePost } from "@/services/classes.service";
 
-export default function PostCard({ post, user, comments = "visible" }: { post: IClassPost, user: ISessionUser, comments?: "visible" | "hidden" }) {
+export default function PostCard({ post: initialPost, user, comments = "visible" }: { post: IClassPost, user: ISessionUser, comments?: "visible" | "hidden" }) {
+    const [post, setPost] = useState<IClassPost | null>(initialPost);
+
     const [commentOpen, setCommentOpen] = useState<boolean>(false);
     const getPostTypeIcon = (type: ClassPostType) => {
         switch (type) {
@@ -43,6 +55,8 @@ export default function PostCard({ post, user, comments = "visible" }: { post: I
         }
     };
 
+    if (!post) return null;
+
     const isAuthorCurrentUser = post.author.id === user.id;
     const formattedDate = (date: string) => {
         return new Date(date).toLocaleDateString("en-US", {
@@ -57,9 +71,34 @@ export default function PostCard({ post, user, comments = "visible" }: { post: I
             minute: "2-digit",
         });
     };
+    const handleDeletePost = async () => {
+        toast.loading("Deleting post...", {
+            id: "delete-post"
+        });
+        try {
+            const res = await deleteCoursePost(post.id);
+            if (res.ok) {
+                toast.success("Post deleted successfully", {
+                    id: "delete-post"
+                });
+                setCommentOpen(false);
+                setPost(null);
+            } else {
+                toast.error(res.message || "Failed to delete post", {
+                    id: "delete-post"
+                });
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            toast.error(error.message || "An error occurred while deleting the post", {
+                id: "delete-post"
+            });
+        }
+    };
 
     return (
-        <div className="rounded-lg border border-border bg-card hover:border-[#0052FF]/30 hover:shadow-md transition-all p-6">
+        <div className="rounded-lg relative border border-border bg-card hover:border-[#0052FF]/30 hover:shadow-md transition-all p-6">
+
             {/* Header Section */}
             <div className="flex items-start justify-between mb-4">
                 <div className="flex items-start gap-4 flex-1">
@@ -88,10 +127,10 @@ export default function PostCard({ post, user, comments = "visible" }: { post: I
                     </div>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 items-center">
                     {
                         post.type === ClassPostType.ASSIGNMENT && post.assignmentDeadLine && (
-                            <Badge className={cn(`lg:flex items-center gap-1 shrink-0 hidden mb-2`, isTimePassed(post.assignmentDeadLine) ? "bg-[#8A0000]" : "bg-[#0A4D22]")}>
+                            <Badge className={cn(`lg:flex items-center gap-1 shrink-0 hidden`, isTimePassed(post.assignmentDeadLine) ? "bg-[#8A0000]" : "bg-[#0A4D22]")}>
                                 <span>Due {formattedDate(post.assignmentDeadLine)} at {formattedTime(post.assignmentDeadLine)}</span>
                             </Badge>
                         )
@@ -100,6 +139,18 @@ export default function PostCard({ post, user, comments = "visible" }: { post: I
                         {getPostTypeIcon(post.type)}
                         <span className="hidden sm:inline">{post.type}</span>
                     </Badge>
+                    {
+                        isAuthorCurrentUser && (
+                            <DropdownMenu >
+                                <DropdownMenuTrigger asChild>
+                                    <EllipsisVertical />
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                    <DropdownMenuItem onClick={handleDeletePost} variant="destructive" ><Trash2 /> Delete</DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        )
+                    }
                 </div>
             </div>
 

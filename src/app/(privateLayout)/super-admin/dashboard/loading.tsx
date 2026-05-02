@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 export default function Loading() {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 p-6 md:p-8 animate-pulse">
+        <div className="min-h-screen bg-linear-to-b from-background to-muted/20 p-6 md:p-8 animate-pulse">
             {/* Header Skeleton */}
             <div className="mb-8">
                 <Skeleton className="h-10 w-48 mb-2" />
@@ -12,7 +12,7 @@ export default function Loading() {
             </div>
 
             {/* Stats Grid Skeleton */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 {[...Array(5)].map((_, index) => (
                     <Card key={index}>
                         <CardContent className="pt-6">

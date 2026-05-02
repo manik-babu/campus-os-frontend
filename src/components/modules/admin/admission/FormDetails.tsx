@@ -26,7 +26,7 @@ export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
                 email: form.email,
                 password: form.email,
                 role: UserRole.STUDENT,
-                gender: "MALE" //TODO: add gender field in form
+                gender: form.gender
             };
             const profileData: IStudentProfileData = {
                 batchId: form.batchId,

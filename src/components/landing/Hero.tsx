@@ -1,11 +1,12 @@
 'use client';
 
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BookOpen, GraduationCap } from 'lucide-react';
 import gsap from "gsap"
 import { useGSAP } from '@gsap/react';
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 interface HeroProps {
     title?: string;
     subtitle?: string;
@@ -43,9 +44,9 @@ export function Hero({
             </div>
 
             <div className="container-landing relative z-10">
-                <div className="grid gap-12 lg:grid-cols-5 lg:gap-8">
+                <div className="grid gap-12 lg:grid-cols-2 grid-cols-1 lg:gap-8">
                     {/* Left Content */}
-                    <div className="flex flex-col justify-center space-y-8 lg:col-span-3">
+                    <div className="flex flex-col justify-center space-y-8">
                         {/* Section Label */}
                         <div className="section-label w-fit hero-text" >
                             <div className="section-label-dot" />
@@ -105,7 +106,7 @@ export function Hero({
                     </div>
 
                     {/* Right Side - Animated Graphic */}
-                    <div className="hidden lg:flex lg:col-span-2 items-center justify-center">
+                    <div className="hidden lg:flex items-center justify-center">
                         <AnimatedHeroGraphic />
                     </div>
                 </div>
@@ -116,11 +117,16 @@ export function Hero({
 
 function AnimatedHeroGraphic() {
     return (
-        <div className="relative h-[400px] w-full max-w-xs">
+        <div className="relative h-[500px] w-full max-w-md">
+            {/* Background glow */}
+            <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#0052FF]/15 to-[#4D7CFF]/10 blur-3xl" />
+            </div>
+
             {/* Outer rotating ring */}
             <svg
                 className="absolute inset-0 h-full w-full animate-spin"
-                style={{ animationDuration: '60s' }}
+                style={{ animationDuration: '120s' }}
                 viewBox="0 0 200 200"
                 fill="none"
             >
@@ -128,52 +134,119 @@ function AnimatedHeroGraphic() {
                     cx="100"
                     cy="100"
                     r="95"
-                    stroke="url(#grad)"
+                    stroke="url(#grad1)"
                     strokeWidth="1"
-                    strokeDasharray="10 5"
-                    opacity="0.3"
+                    strokeDasharray="15 5"
+                    opacity="0.2"
                 />
                 <defs>
-                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stopColor="#0052FF" />
                         <stop offset="100%" stopColor="#4D7CFF" />
                     </linearGradient>
                 </defs>
             </svg>
 
-            {/* Central gradient circle */}
-            <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative h-48 w-48">
-                    {/* Main gradient circle */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#0052FF] to-[#4D7CFF] opacity-10 blur-3xl" />
+            {/* Main SVG Illustration */}
+            <svg
+                className="absolute inset-0 h-full w-full"
+                viewBox="0 0 400 400"
+                fill="none"
+            >
+                <defs>
+                    <linearGradient id="bluGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#0052FF" />
+                        <stop offset="100%" stopColor="#4D7CFF" />
+                    </linearGradient>
+                </defs>
 
-                    {/* Core accent block */}
-                    <div className="absolute right-0 top-8 h-24 w-24 rounded-2xl bg-[#0052FF] shadow-accent-lg" />
+                {/* Lightbulb - Center */}
+                <g className="animate-pulse">
+                    {/* Bulb glow */}
+                    <circle cx="200" cy="150" r="65" fill="url(#bluGrad)" opacity="0.1" />
 
-                    {/* Floating decorative circles */}
-                    <div className="absolute left-0 top-0 h-16 w-16 rounded-full border-2 border-[#0052FF]/30" />
-                    <div className="absolute bottom-8 right-8 h-12 w-12 rounded-full bg-[#4D7CFF]/20" />
+                    {/* Bulb */}
+                    <path
+                        d="M 200 70 C 220 70 235 85 235 105 C 235 120 228 128 220 135 C 212 142 205 150 205 160 L 195 160 C 195 150 188 142 180 135 C 172 128 165 120 165 105 C 165 85 180 70 200 70 Z"
+                        fill="url(#bluGrad)"
+                        stroke="#0052FF"
+                        strokeWidth="2.5"
+                    />
 
-                    {/* Dot grid pattern */}
-                    <div className="absolute inset-0 opacity-5">
-                        {[...Array(9)].map((_, i) => (
-                            <div
-                                key={i}
-                                className="absolute h-1 w-1 rounded-full bg-[#0052FF]"
-                                style={{
-                                    left: `${(i % 3) * 50}%`,
-                                    top: `${Math.floor(i / 3) * 50}%`,
-                                }}
-                            />
-                        ))}
-                    </div>
+                    {/* Socket */}
+                    <rect x="187" y="160" width="26" height="12" rx="2" fill="url(#bluGrad)" stroke="#0052FF" strokeWidth="2" />
+
+                    {/* Base */}
+                    <rect x="189" y="172" width="22" height="6" rx="1" fill="url(#bluGrad)" stroke="#0052FF" strokeWidth="1.5" />
+                    <rect x="187" y="178" width="26" height="4" rx="1" fill="#4D7CFF" opacity="0.6" />
+
+                    {/* Light rays */}
+                    <line x1="200" y1="40" x2="200" y2="15" stroke="url(#bluGrad)" strokeWidth="3" strokeLinecap="round" />
+                    <line x1="245" y1="95" x2="265" y2="75" stroke="url(#bluGrad)" strokeWidth="2.5" strokeLinecap="round" />
+                    <line x1="155" y1="95" x2="135" y2="75" stroke="url(#bluGrad)" strokeWidth="2.5" strokeLinecap="round" />
+                </g>
+
+                {/* Books Stack - Bottom Right */}
+                <g style={{ animation: 'bounce 2s ease-in-out infinite' }} opacity="0.9">
+                    {/* Book 1 - Bottom */}
+                    <rect x="240" y="260" width="70" height="18" rx="1" fill="url(#bluGrad)" stroke="#0052FF" strokeWidth="2" />
+                    <line x1="240" y1="263" x2="310" y2="263" stroke="#fff" strokeWidth="1" opacity="0.5" />
+
+                    {/* Book 2 - Middle */}
+                    <rect x="255" y="238" width="65" height="18" rx="1" fill="#4D7CFF" stroke="#0052FF" strokeWidth="2" />
+                    <line x1="255" y1="241" x2="320" y2="241" stroke="#fff" strokeWidth="1" opacity="0.5" />
+
+                    {/* Book 3 - Top */}
+                    <rect x="270" y="216" width="60" height="18" rx="1" fill="#0052FF" stroke="#4D7CFF" strokeWidth="2" />
+                    <line x1="270" y1="219" x2="330" y2="219" stroke="#fff" strokeWidth="1" opacity="0.5" />
+                </g>
+
+                {/* Bottom Book - Left side */}
+                <g style={{ animation: 'float 4s ease-in-out infinite 0.5s' }} opacity="0.85">
+                    {/* Book 1 */}
+                    <rect x="50" y="280" width="70" height="14" rx="1" fill="#0052FF" stroke="#4D7CFF" strokeWidth="1.5" opacity="0.7" />
+                    <line x1="50" y1="283" x2="120" y2="283" stroke="#fff" strokeWidth="0.7" opacity="0.4" />
+
+                    {/* Book 2 */}
+                    <rect x="65" y="298" width="70" height="14" rx="1" fill="#4D7CFF" stroke="#0052FF" strokeWidth="1.5" opacity="0.6" />
+                    <line x1="65" y1="301" x2="135" y2="301" stroke="#fff" strokeWidth="0.7" opacity="0.4" />
+                </g>
+
+                {/* Floating circles decoration */}
+                <circle cx="130" cy="110" r="6" fill="#0052FF" opacity="0.3" />
+                <circle cx="270" cy="170" r="5" fill="#4D7CFF" opacity="0.3" />
+                <circle cx="80" cy="280" r="8" fill="#0052FF" opacity="0.2" />
+            </svg>
+
+            {/* CSS Animations */}
+            <style>{`
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                }
+                @keyframes bounce {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-5px); }
+                }
+            `}</style>
+
+            {/* Lucide Icons - Top Corners */}
+            <div className="absolute top-8 left-8 animate-bounce" style={{ animationDuration: '2.5s' }}>
+                <div className="p-4 rounded-2xl bg-gradient-to-br from-[#0052FF]/20 to-[#4D7CFF]/10 backdrop-blur-sm border border-[#0052FF]/30">
+                    <BookOpen className="h-8 w-8 text-[#0052FF]" />
+                </div>
+            </div>
+
+            <div className="absolute top-12 right-8 animate-bounce" style={{ animationDuration: '2s', animationDelay: '0.3s' }}>
+                <div className="p-4 rounded-2xl bg-gradient-to-br from-[#4D7CFF]/20 to-[#0052FF]/10 backdrop-blur-sm border border-[#4D7CFF]/30">
+                    <GraduationCap className="h-8 w-8 text-[#4D7CFF]" />
                 </div>
             </div>
 
             {/* Floating accent label */}
-            <div className="absolute bottom-12 right-0 gap-2 px-4 py-2 rounded-lg bg-card border border-border shadow-md flex items-center">
+            <div className="absolute bottom-16 right-4 gap-2 px-4 py-2 rounded-lg bg-card border border-border shadow-md flex items-center">
                 <div className="h-2 w-2 rounded-full bg-[#0052FF] animate-pulse" />
-                <span className="text-xs font-medium text-foreground">Innovating Education</span>
+                <span className="text-xs font-medium text-foreground">Knowledge & Innovation</span>
             </div>
         </div>
     );

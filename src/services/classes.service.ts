@@ -74,3 +74,16 @@ export const getComments = async (coursePostId: string, search: Omit<IGetClassSe
         }
     }
 };
+
+export const deleteCoursePost = async (postId: string): Promise<IApiResponse<boolean>> => {
+    try {
+        return await httpClient.delete<boolean>(`/classes/course-posts/${postId}`);
+
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "An error occurred while deleting course post",
+            data: false
+        }
+    }
+};      

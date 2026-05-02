@@ -75,6 +75,7 @@ export default function StudentBills() {
         // eslint-disable-next-line react-hooks/set-state-in-effect
         fetchSemesters();
     }, []);
+    console.log(bill)
     return (
         <div className="space-y-8">
             {/* Header Section */}

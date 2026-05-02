@@ -44,6 +44,7 @@ export interface IAdmissionFormDetails {
     department: string;
     batchId: string;
     batchNo: string;
+    gender: string;
 }
 export interface IStudentProfileData {
     batchId: string;
