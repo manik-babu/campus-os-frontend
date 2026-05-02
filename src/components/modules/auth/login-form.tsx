@@ -113,7 +113,7 @@ export function LoginForm({
                   )
                 }
               </form.Field>
-              <FieldDescription className="hover:underline cursor-pointer">Forgot your password?</FieldDescription>
+              <FieldDescription onClick={() => router.push("/reset-password")} className="hover:underline cursor-pointer">Forgot your password?</FieldDescription>
               {
                 formError && <Alert variant={"destructive"}>
                   <AlertCircleIcon />

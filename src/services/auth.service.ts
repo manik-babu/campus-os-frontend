@@ -60,3 +60,31 @@ export const logout = async () => {
     const cookie = await cookies();
     cookie.delete("token");
 }
+
+export const sendOtp = async ({ email }: { email: string }): Promise<IApiResponse<{ hashedOtp: string; email: string }>> => {
+    try {
+        return await httpClient.post<{ hashedOtp: string; email: string }>("/auth/forgot-password", {
+            email,
+        });
+    } catch (error: any) {
+        console.error("Send OTP error", error);
+        return {
+            ok: false,
+            message: error.message || "Failed to send OTP",
+        }
+    }
+}
+export const resetPassword = async ({ email, newPassword }: { email: string; newPassword: string }): Promise<IApiResponse<null>> => {
+    try {
+        return await httpClient.post<null>("/auth/reset-password", {
+            email,
+            newPassword,
+        });
+    } catch (error: any) {
+        console.error("Reset password error", error);
+        return {
+            ok: false,
+            message: error.message || "Failed to reset password",
+        }
+    }
+}
