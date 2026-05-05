@@ -74,13 +74,6 @@ The system is designed with scalability, security, and user experience in mind, 
 - **Zustand** - State management
 - **Axios** - HTTP client
 
-### Backend
-- **Node.js** - Runtime environment
-- **Express.js** - Web framework
-- **TypeScript** - Type-safe server-side code
-- **Prisma** - Next-generation ORM
-- **PostgreSQL** - Relational database
-
 ### DevOps & Tools
 - **Vercel** - Frontend deployment platform
 - **ESLint** - Code quality and consistency
@@ -92,7 +85,6 @@ The system is designed with scalability, security, and user experience in mind, 
 ## 🚀 Setup Instructions
 
 ### Prerequisites
-- Node.js (v18 or higher)
 - npm or yarn package manager
 - Git
 
@@ -100,8 +92,8 @@ The system is designed with scalability, security, and user experience in mind, 
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd CampusOS/frontend
+   git clone https://github.com/manik-babu/campus-os-frontend.git
+   cd frontend
    ```
 
 2. **Install dependencies**
@@ -115,8 +107,15 @@ The system is designed with scalability, security, and user experience in mind, 
    - Copy the environment template file (if available) or create a `.env.local` file
    - Add your API endpoints and configuration variables:
    ```env
-   NEXT_PUBLIC_API_URL=your_api_url
-   # Add other required environment variables
+   NODE_ENV="development"
+
+   BACKEND_URL=backend-api-url
+   FRONTEND_URL=frontend-base-url
+
+   NEXT_PUBLIC_BACKEND_URL=backend-base-url
+   NEXT_PUBLIC_FRONTEND_URL=frontend-base-url
+
+   JWT_SECRET=your-jsonwebtoken-secret
    ```
 
 4. **Run the development server**
@@ -148,26 +147,6 @@ The system is designed with scalability, security, and user experience in mind, 
 ### Code Quality
 - Run ESLint: `npm run lint`
 - Format code: `npm run format` (if configured)
-
----
-
-## 📝 Contributing
-
-We welcome contributions to CampusOS! To contribute:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-Please ensure your code follows the project's coding standards and includes appropriate tests.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 

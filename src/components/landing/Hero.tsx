@@ -31,6 +31,13 @@ export function Hero({
             stagger: 0.1,
             delay: 0.5,
         });
+        gsap.from("#hero-graphic", {
+            opacity: 0,
+            scale: 0.95,
+            duration: 1.5,
+            delay: 1.5,
+            ease: "power3.out",
+        });
     });
 
     return (
@@ -106,7 +113,7 @@ export function Hero({
                     </div>
 
                     {/* Right Side - Animated Graphic */}
-                    <div className="hidden lg:flex items-center justify-center">
+                    <div id="hero-graphic" className="hidden lg:flex items-center justify-center">
                         <AnimatedHeroGraphic />
                     </div>
                 </div>
