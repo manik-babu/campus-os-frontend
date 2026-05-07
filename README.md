@@ -93,7 +93,7 @@ The system is designed with scalability, security, and user experience in mind, 
 1. **Clone the repository**
    ```bash
    git clone https://github.com/manik-babu/campus-os-frontend.git
-   cd frontend
+   cd campus-os-frontend
    ```
 
 2. **Install dependencies**
