@@ -12,8 +12,11 @@ import { UserRole } from "@/@types/session";
 import { admitStudent, updateAdmissionFormStatus } from "@/services/admin.service";
 import { Spinner } from "@/components/ui/spinner";
 import { AlertDialog, AlertDialogContent, AlertDialogTitle } from "@/components/ui/alert-dialog";
+import useAdmissionFormStore from "@/zustand/admission";
 
 export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
+    const data = useAdmissionFormStore(state => state.data);
+    const setData = useAdmissionFormStore(state => state.setData);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [rejecting, setRejecting] = useState(false);
@@ -52,6 +55,11 @@ export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
             if (res.ok) {
                 toast.success("Student admitted successfully");
                 await updateAdmissionFormStatus(form.id, "APPROVED");
+                // Update the form status in the store
+                if (data) {
+                    const updatedForms = data.forms.filter(f => f.id !== form.id);
+                    setData({ ...data, forms: updatedForms });
+                }
             } else {
                 toast.error(res.message || "Failed to admit student");
             }
@@ -70,6 +78,11 @@ export default function FormDetails({ form }: { form: IAdmissionFormDetails }) {
             const res = await updateAdmissionFormStatus(form.id, "REJECTED");
             if (res.ok) {
                 toast.success("Admission form rejected successfully");
+                // Update the form status in the store
+                if (data) {
+                    const updatedForms = data.forms.filter(f => f.id !== form.id);
+                    setData({ ...data, forms: updatedForms });
+                }
             } else {
                 toast.error(res.message || "Failed to reject admission form. Please try again.");
             }

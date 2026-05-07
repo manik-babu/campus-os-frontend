@@ -72,7 +72,7 @@ export default function CourseOfferingPage({ courses, batches, faculties, semest
                     e.stopPropagation();
                     form.handleSubmit();
                 }}>
-                    <Card className="max-w-2xl mx-auto p-4">
+                    <Card className="max-w-2xl p-4">
                         <h3>Add a new course offering for {semester.name}</h3>
                         <FieldGroup>
                             <form.Field
@@ -97,7 +97,6 @@ export default function CourseOfferingPage({ courses, batches, faculties, semest
                                                     ))}
                                                 </SelectContent>
                                             </Select>
-                                            <FieldDescription>Select the batch for which you want to create this course offering. </FieldDescription>
                                         </div>
 
                                     )
@@ -126,7 +125,6 @@ export default function CourseOfferingPage({ courses, batches, faculties, semest
                                                     ))}
                                                 </SelectContent>
                                             </Select>
-                                            <FieldDescription>Select the course for which you want to create this offering. </FieldDescription>
                                         </div>
                                     }
                                 }
@@ -155,7 +153,6 @@ export default function CourseOfferingPage({ courses, batches, faculties, semest
                                                     ))}
                                                 </SelectContent>
                                             </Select>
-                                            <FieldDescription>Select the faculty member who will be teaching this course offering. </FieldDescription>
                                         </div>
                                     )
                                 }
@@ -178,7 +175,6 @@ export default function CourseOfferingPage({ courses, batches, faculties, semest
                                                 aria-invalid={isInvalid}
                                             />
                                             {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                                            <FieldDescription>Enter the credit fees for this course offering. </FieldDescription>
                                         </div>
                                     }
                                 }

@@ -16,10 +16,10 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Search, BookOpen, Loader } from "lucide-react";
-import CourseCard from "./CourseCard";
 import CourseCardSkeleton from "@/components/skeletons/enrollments/CourseCardSkeleton";
+import CourseCard from "./CourseCard";
 
-export default function EnrollCourse({ courseOfferings, batches: initialBatches }: { courseOfferings: ICourseOfferingsData; batches: IBatch[] }) {
+export default function DisplayOffering({ courseOfferings, batches: initialBatches }: { courseOfferings: ICourseOfferingsData; batches: IBatch[] }) {
     const [offerings, setOfferings] = useState<ICourseOfferingsData>(courseOfferings);
     const [batches, setbatches] = useState<IBatch[]>([{ id: "all", batchNo: "All Batch" }, ...initialBatches]);
     const [selectedBatchId, setSelectedBatchId] = useState<string>("all");
@@ -60,13 +60,10 @@ export default function EnrollCourse({ courseOfferings, batches: initialBatches 
     const courses = offerings.courses || [];
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 mt-14">
             {/* Header Section */}
             <div className="space-y-2">
-                <h2 className="text-3xl font-bold text-foreground">Add New Courses</h2>
-                <p className="text-muted-foreground max-w-2xl">
-                    Browse and add available courses to your enrollment. Select your batch and search for courses to get started.
-                </p>
+                <h2 className="text-3xl font-bold text-foreground">Added Course Offerings</h2>
             </div>
 
             {/* Filters Section */}

@@ -119,6 +119,32 @@ export default function SuperAdminDepartment() {
                             <Card className="p-4 w-3xl!">
                                 <FieldGroup className="gap-2">
                                     <form.Field
+                                        name="programId"
+                                    >
+                                        {
+                                            (field) => (
+                                                <div className="space-y-2">
+                                                    <FieldLabel htmlFor={field.name}>Program</FieldLabel>
+                                                    <Select
+                                                        value={field.state.value}
+                                                        onValueChange={(value) => { field.handleChange(value as ProgramLevel); }}
+                                                    >
+                                                        <SelectTrigger>
+                                                            <SelectValue placeholder="Choose a program" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            {programs?.map((program) => (
+                                                                <SelectItem key={program.id} value={program.id}>
+                                                                    {program.shortName} - {program.name}
+                                                                </SelectItem>
+                                                            ))}
+                                                        </SelectContent>
+                                                    </Select>
+                                                </div>
+                                            )
+                                        }
+                                    </form.Field>
+                                    <form.Field
                                         name="name"
                                     >
                                         {
@@ -145,32 +171,7 @@ export default function SuperAdminDepartment() {
                                             )
                                         }
                                     </form.Field>
-                                    <form.Field
-                                        name="programId"
-                                    >
-                                        {
-                                            (field) => (
-                                                <div className="space-y-2">
-                                                    <FieldLabel htmlFor={field.name}>Program Level</FieldLabel>
-                                                    <Select
-                                                        value={field.state.value}
-                                                        onValueChange={(value) => { field.handleChange(value as ProgramLevel); }}
-                                                    >
-                                                        <SelectTrigger>
-                                                            <SelectValue placeholder="Choose a program" />
-                                                        </SelectTrigger>
-                                                        <SelectContent>
-                                                            {programs?.map((program) => (
-                                                                <SelectItem key={program.id} value={program.id}>
-                                                                    {program.shortName} - {program.name}
-                                                                </SelectItem>
-                                                            ))}
-                                                        </SelectContent>
-                                                    </Select>
-                                                </div>
-                                            )
-                                        }
-                                    </form.Field>
+
                                     <form.Field
                                         name="description"
                                     >
@@ -179,9 +180,9 @@ export default function SuperAdminDepartment() {
                                                 const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
                                                 return (
                                                     <Field>
-                                                        <FieldLabel htmlFor={field.name}>Program Description</FieldLabel>
+                                                        <FieldLabel htmlFor={field.name}>Department Description</FieldLabel>
                                                         <Textarea
-                                                            placeholder="Enter program description..."
+                                                            placeholder="Enter department description..."
                                                             value={field.state.value}
                                                             onChange={(e) => field.handleChange(e.target.value)}
                                                             aria-invalid={isInvalid}

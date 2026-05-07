@@ -16,11 +16,13 @@ import { toast } from "sonner";
 import { FileUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@/components/ui/spinner";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AdmissionForm() {
     const router = useRouter();
     const [programs, setPrograms] = useState<IPrograms[] | null>(null);
     const [departments, setDepartments] = useState<IDepartment[] | null>(null);
+    const [fetchingDepartments, setFetchingDepartments] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [image, setImage] = useState<File | null>(null);
@@ -28,7 +30,7 @@ export default function AdmissionForm() {
     const [hscDoc, setHscDoc] = useState<File | null>(null);
 
     const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: 20 }, (_, i) => currentYear - i).sort();
+    const years = Array.from({ length: 10 }, (_, i) => currentYear - i).sort();
 
     const form = useForm({
         defaultValues: {
@@ -67,6 +69,10 @@ export default function AdmissionForm() {
                 }
                 if (!hscDoc) {
                     toast.error("Please upload your HSC certificate.");
+                    return;
+                }
+                if (value.hscPassingYear <= value.sscPassingYear) {
+                    toast.error("HSC passing year must be greater than SSC passing year.");
                     return;
                 }
                 const data = {
@@ -131,6 +137,7 @@ export default function AdmissionForm() {
     }, []);
 
     const fetchDepartments = async (programId: string) => {
+        setFetchingDepartments(true);
         try {
             const res = await getDepartments(programId);
             if (res.ok && res.data) {
@@ -142,6 +149,9 @@ export default function AdmissionForm() {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             toast.error(error.message || "Failed to fetch departments");
+        }
+        finally {
+            setFetchingDepartments(false);
         }
     }
 
@@ -179,25 +189,30 @@ export default function AdmissionForm() {
                                         return (
                                             <div className="space-y-2">
                                                 <FieldLabel htmlFor={field.name}>Program</FieldLabel>
-                                                <Select
-                                                    value={field.state.value || ""}
-                                                    onValueChange={(value) => {
-                                                        field.handleChange(value);
-                                                        fetchDepartments(value);
-                                                        form.setFieldValue("departmentId", "");
-                                                    }}
-                                                >
-                                                    <SelectTrigger aria-invalid={isInvalid}>
-                                                        <SelectValue placeholder="Choose a program" />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        {programs?.map((program) => (
-                                                            <SelectItem key={program.id} value={program.id}>
-                                                                {program.name}
-                                                            </SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
+                                                {
+                                                    programs ?
+                                                        <Select
+                                                            value={field.state.value || ""}
+                                                            onValueChange={(value) => {
+                                                                field.handleChange(value);
+                                                                fetchDepartments(value);
+                                                                form.setFieldValue("departmentId", "");
+                                                            }}
+                                                        >
+                                                            <SelectTrigger aria-invalid={isInvalid}>
+                                                                <SelectValue placeholder="Choose a program" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                {programs?.map((program) => (
+                                                                    <SelectItem key={program.id} value={program.id}>
+                                                                        {program.name}
+                                                                    </SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                        :
+                                                        <Skeleton className="h-10 w-full rounded-md" />
+                                                }
                                                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                             </div>
                                         )
@@ -210,24 +225,29 @@ export default function AdmissionForm() {
                                         return (
                                             <div className="space-y-2">
                                                 <FieldLabel htmlFor={field.name}>Department</FieldLabel>
-                                                <Select
-                                                    value={field.state.value || ""}
-                                                    onValueChange={(value) => {
-                                                        field.handleChange(value);
-                                                    }}
+                                                {
+                                                    !fetchingDepartments ?
+                                                        <Select
+                                                            value={field.state.value || ""}
+                                                            onValueChange={(value) => {
+                                                                field.handleChange(value);
+                                                            }}
 
-                                                >
-                                                    <SelectTrigger aria-invalid={isInvalid} disabled={!field.form.getFieldValue("programId")}>
-                                                        <SelectValue placeholder="Choose a department" />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        {departments?.map((department) => (
-                                                            <SelectItem key={department.id} value={department.id}>
-                                                                {department.name}
-                                                            </SelectItem>
-                                                        ))}
-                                                    </SelectContent>
-                                                </Select>
+                                                        >
+                                                            <SelectTrigger aria-invalid={isInvalid} disabled={!field.form.getFieldValue("programId")}>
+                                                                <SelectValue placeholder="Choose a department" />
+                                                            </SelectTrigger>
+                                                            <SelectContent>
+                                                                {departments?.map((department) => (
+                                                                    <SelectItem key={department.id} value={department.id}>
+                                                                        {department.name}
+                                                                    </SelectItem>
+                                                                ))}
+                                                            </SelectContent>
+                                                        </Select>
+                                                        :
+                                                        <Skeleton className="h-10 w-full rounded-md" />
+                                                }
                                                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
                                             </div>
                                         )
@@ -529,7 +549,7 @@ export default function AdmissionForm() {
                         <CardContent>
                             <FieldGroup className="grid gap-8 sm:grid-cols-3">
                                 <div className="space-y-2">
-                                    <FieldLabel>Profile Picture</FieldLabel>
+                                    <FieldLabel>Student Image</FieldLabel>
                                     <ImagePicker
                                         image={image}
                                         setImage={setImage}

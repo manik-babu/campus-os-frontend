@@ -5,9 +5,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { getAdmissionForms } from "@/services/admin.service";
 import useAdmissionFormStore from "@/zustand/admission";
 import { Search } from "lucide-react";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import FormDetails from "./FormDetails";
 import FormCard from "./FormCard";
 import { Button } from "@/components/ui/button";
 import { AdmissionFormCardSkeleton } from "@/components/skeletons/AdmissionFormCard";

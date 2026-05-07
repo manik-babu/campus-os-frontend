@@ -23,7 +23,7 @@ import {
     InputOTPSlot,
 } from "@/components/ui/input-otp"
 import { useEffect, useState } from "react"
-import { resetPassword, sendOtp } from "@/services/auth.service"
+import { logout, resetPassword, sendOtp } from "@/services/auth.service"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
@@ -84,11 +84,6 @@ export function InputOTPForm({ res: initialRes, time }: {
         }
         const current_time = new Date().getTime();
         const sending_time = sendingTime.getTime();
-        console.log(current_time - sending_time);
-        console.table({
-            current_time,
-            sendingTime: sending_time,
-        })
         if ((current_time - sending_time) > 5 * 60 * 1000) {
             setFormError("OTP expired. Please request a new OTP.");
             return;
@@ -120,6 +115,7 @@ export function InputOTPForm({ res: initialRes, time }: {
             })
             if (response.ok) {
                 toast.success("Password reset successfully. Please login with your new password.");
+                await logout();
                 router.push("/erp-login");
             }
             else {

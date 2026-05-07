@@ -5,7 +5,7 @@ export function AddCourseOfferingPageSkeleton() {
     return (
         <div className="animate-pulse">
             <section className="mt-6">
-                <Card className="max-w-2xl mx-auto p-4">
+                <Card className="max-w-2xl p-4">
                     {/* Title */}
                     <div className="mb-6">
                         <Skeleton className="h-6 w-64 mb-2" />
