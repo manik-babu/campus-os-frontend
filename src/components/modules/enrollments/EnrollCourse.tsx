@@ -21,7 +21,7 @@ import CourseCardSkeleton from "@/components/skeletons/enrollments/CourseCardSke
 
 export default function EnrollCourse({ courseOfferings, batches: initialBatches }: { courseOfferings: ICourseOfferingsData; batches: IBatch[] }) {
     const [offerings, setOfferings] = useState<ICourseOfferingsData>(courseOfferings);
-    const [batches, setbatches] = useState<IBatch[]>([{ id: "all", batchNo: "All Batch" }, ...initialBatches]);
+    const [batches, setbatches] = useState<IBatch[]>([{ id: "all", batchNo: "All" }, ...initialBatches]);
     const [selectedBatchId, setSelectedBatchId] = useState<string>("all");
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);

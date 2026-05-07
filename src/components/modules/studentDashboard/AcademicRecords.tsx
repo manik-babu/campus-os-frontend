@@ -4,8 +4,9 @@
 import { IAcademicRecord } from "@/@types/studentDashboard";
 import AcademicRecordsSkeleton from "@/components/skeletons/studentDashboard/AcademicRecordsSkeleton";
 import { Alert, AlertTitle } from "@/components/ui/alert";
+import { Card } from "@/components/ui/card";
 import { getAcademicRecords } from "@/services/studentDashboard.service";
-import { AlertCircleIcon } from "lucide-react";
+import { AlertCircleIcon, BookCheck, CircleCheckBig, CreditCard } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function AcademicRecords() {
@@ -51,24 +52,39 @@ export default function AcademicRecords() {
     return (
         <div className="space-y-4 my-6">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                <div className="rounded-lg p-4 bg-card">
-                    <p className="text-sm text-muted-foreground">Completed Semesters</p>
-                    <p className="text-2xl font-bold text-blue-500 mt-1">
-                        {records.completedSemesters}
-                    </p>
-                </div>
-                <div className="rounded-lg p-4 bg-card">
-                    <p className="text-sm text-muted-foreground">Completed Courses</p>
-                    <p className="text-2xl font-bold text-green-500 mt-1">
-                        {records.completedCourses}
-                    </p>
-                </div>
-                <div className="rounded-lg p-4 bg-card">
-                    <p className="text-sm text-muted-foreground">Earned Credits</p>
-                    <p className="text-2xl font-bold text-purple-500 mt-1">
-                        {records.earnedCredits}
-                    </p>
-                </div>
+                <Card className={`p-6 border-0 shadow-md hover:shadow-lg transition-shadow duration-200 bg-linear-to-br from-green-50 to-green-100 `}>
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-slate-600 text-sm font-medium mb-1">Completed Semesters</p>
+                            <p className="text-4xl font-bold text-slate-900">{records.completedSemesters}</p>
+                        </div>
+                        <div className="text-slate-400 opacity-80">
+                            <CircleCheckBig size={48} />
+                        </div>
+                    </div>
+                </Card>
+                <Card className={`p-6 border-0 shadow-md hover:shadow-lg transition-shadow duration-200 bg-linear-to-br from-blue-50 to-blue-100 `}>
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-slate-600 text-sm font-medium mb-1">Completed Courses</p>
+                            <p className="text-4xl font-bold text-slate-900">{records.completedCourses}</p>
+                        </div>
+                        <div className="text-slate-400 opacity-80">
+                            <BookCheck size={48} />
+                        </div>
+                    </div>
+                </Card>
+                <Card className={`p-6 border-0 shadow-md hover:shadow-lg transition-shadow duration-200 bg-linear-to-br from-purple-50 to-purple-100 `}>
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <p className="text-slate-600 text-sm font-medium mb-1">Earned Credits</p>
+                            <p className="text-4xl font-bold text-slate-900">{records.earnedCredits}</p>
+                        </div>
+                        <div className="text-slate-400 opacity-80">
+                            <CreditCard size={48} />
+                        </div>
+                    </div>
+                </Card>
             </div>
         </div>
     );
