@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { LogIn } from 'lucide-react';
+import { ChevronDown, LogIn } from 'lucide-react';
 import Link from 'next/link';
 import { ModeToggle } from '../ui/mode-toggle';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 
 export function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
@@ -35,15 +36,50 @@ export function Navigation() {
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center gap-8">
                         <ModeToggle />
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.label}
-                                href={item.href}
-                                className={cn("text-sm font-medium text-muted-foreground hover:text-foreground transition-colors border-b-2 border-transparent hover:border-[#0052FF]", pathname === item.href ? "border-[#0052FF] text-foreground" : "")}
-                            >
-                                {item.label}
-                            </Link>
-                        ))}
+                        {navItems.map((item) => {
+                            if (item.label !== "Programs") {
+                                return (
+                                    <Link
+                                        key={item.label}
+                                        href={item.href}
+                                        className={cn("text-sm font-medium text-muted-foreground hover:text-foreground transition-colors border-b-2 border-transparent hover:border-[#0052FF]", pathname === item.href ? "border-[#0052FF] text-foreground" : "")}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                )
+                            }
+                            else {
+                                return (
+                                    <DropdownMenu key={item.label}>
+                                        <DropdownMenuTrigger>
+                                            <span className={cn("text-sm font-medium text-muted-foreground hover:text-foreground transition-colors border-b-2 border-transparent hover:border-[#0052FF]", pathname === item.href ? "border-[#0052FF] text-foreground" : "")}>
+                                                {item.label} <ChevronDown className='w-4 h-4 inline-block' />
+                                            </span>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent className='bg-background/95 backdrop-blur-sm border border-border'>
+                                            <Link
+                                                href="/programs/#bachelors"
+                                                className={cn("block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors", pathname === "/programs/undergraduate" ? "bg-accent text-foreground" : "")}
+                                            >
+                                                Bachelors
+                                            </Link>
+                                            <Link
+                                                href="/programs/#masters"
+                                                className={cn("block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors", pathname === "/programs/postgraduate" ? "bg-accent text-foreground" : "")}
+                                            >
+                                                Masters
+                                            </Link>
+                                            <Link
+                                                href="/programs/#phd"
+                                                className={cn("block px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors", pathname === "/programs/phd" ? "bg-accent text-foreground" : "")}
+                                            >
+                                                PhD
+                                            </Link>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                )
+                            }
+                        })}
                         <Link href="/erp-login" className="btn-primary text-sm h-10 gap-1.5 px-4">
                             <LogIn className='w-4 h-4' /> MY ERP
                         </Link>

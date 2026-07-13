@@ -132,7 +132,7 @@ export function Features() {
         };
 
         gsap.to(counterAnimation.faculty, {
-            value: 150,
+            value: 3,
             duration: 2,
             ease: "power2.out",
             scrollTrigger: {

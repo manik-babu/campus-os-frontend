@@ -30,7 +30,7 @@ const stats: StatCardProps[] = [
         description: 'Educating leaders since 1999',
     },
     {
-        number: '15,000+',
+        number: '7+',
         label: 'Students',
         description: 'Across all programs',
     },

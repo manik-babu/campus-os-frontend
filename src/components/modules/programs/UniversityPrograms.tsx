@@ -216,7 +216,7 @@ export default function UniversityPrograms() {
             <div className="section-py">
                 <div className="container-landing space-y-16">
                     {programs.map((program, index) => (
-                        <div key={program.id} className="space-y-8">
+                        <div key={program.id} id={program.id} className="space-y-8">
                             {/* Program Header */}
                             <div className="space-y-4">
                                 <div className={`program-text-${index.toString()} inline-flex items-center gap-3 p-3 rounded-lg ${program.color}`}>
