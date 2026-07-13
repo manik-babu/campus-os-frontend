@@ -27,3 +27,27 @@ export const getAcademicRecords = async (): Promise<IApiResponse<IAcademicRecord
         }
     }
 }
+
+// profile update 
+export const updateStudentContact = async (email: string, phoneNumber: string): Promise<IApiResponse<null>> => {
+    try {
+
+        return await httpClient.patch<null>("/students/update-contact", { email, phoneNumber });
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to update contact information",
+        }
+    }
+}
+export const updateStudentAddress = async (presentAddress: string, permanentAddress: string): Promise<IApiResponse<null>> => {
+    try {
+
+        return await httpClient.patch<null>("/students/update-address", { presentAddress, permanentAddress });
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to update address information",
+        }
+    }
+}

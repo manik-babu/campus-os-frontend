@@ -5,13 +5,58 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Building2, Calendar, HashIcon } from "lucide-react";
 import Image from "next/image";
+import { Button } from "../ui/button";
+import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
 
+import { FieldGroup } from "../ui/field";
+import { Alert, AlertTitle } from "../ui/alert";
+import { AlertCircleIcon } from "lucide-react";
+import { Input } from "../ui/input";
+import { useState } from "react";
+import { updateAdminProfile } from "@/services/admin.service";
+import * as z from "zod";
+const adminProfileSchema = z.object({
+    email: z.email("Invalid email address"),
+    phoneNumber: z.string().min(10, "Phone number must be at least 10 characters long").max(15, "Phone number cannot exceed 15 characters")
+});
 export default function AdminProfile({ user }: { user: IUserDetails }) {
+    const [loading, setLoading] = useState(false);
+    const [email, setEmail] = useState(user.email);
+    const [phone, setPhone] = useState(user.adminProfile?.phoneNumber || "");
+    const [formError, setFormError] = useState<string | null>(null);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const profile = user.adminProfile as IAdminProfile;
 
     const statusColor = user.status === "active" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800";
     const genderColor = user.gender === "Male" ? "bg-blue-100 text-blue-800" : "bg-pink-100 text-pink-800";
-
+    const handleUpdate = async () => {
+        if (!email || !phone) {
+            setFormError("Email and phone number cannot be empty.");
+            return;
+        }
+        setLoading(true);
+        const validationResult = adminProfileSchema.safeParse({ email, phoneNumber: phone });
+        if (!validationResult.success) {
+            setFormError("Invalid input type or required fields are missing.");
+            setLoading(false);
+            return;
+        }
+        try {
+            const res = await updateAdminProfile({ email, phoneNumber: phone });
+            if (!res.ok) {
+                setFormError(res.message);
+            }
+            else {
+                setFormError(null);
+                setSuccessMessage("Contact information updated successfully.");
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            setFormError(error.message || "An unexpected error occurred.");
+        } finally {
+            setLoading(false);
+        }
+    }
     return (
         <div className="space-y-8">
             {/* Header Section */}
@@ -77,6 +122,69 @@ export default function AdminProfile({ user }: { user: IUserDetails }) {
                     {/* Contact Information */}
                     <Card>
                         <CardHeader>
+                            <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                    <Button className="w-fit">Edit info</Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Edit Contact Information</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            Update your email and phone number.
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <div>
+                                        <form onSubmit={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                        }}>
+                                            <FieldGroup className="gap-2">
+                                                <div>
+                                                    <label htmlFor="email" className="text-sm text-muted-foreground">Email</label>
+                                                    <Input
+                                                        id={"email"}
+                                                        placeholder="Email"
+                                                        type="email"
+                                                        onChange={(e) => setEmail(e.target.value)}
+                                                        value={email}
+
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label htmlFor="phone" className="text-sm text-muted-foreground">Phone</label>
+                                                    <Input
+                                                        id={"phone"}
+                                                        placeholder="Phone"
+                                                        type="text"
+                                                        value={phone}
+                                                        onChange={(e) => setPhone(e.target.value)}
+                                                    />
+
+                                                </div>
+                                            </FieldGroup>
+                                            <FieldGroup className="gap-2 mt-2">
+                                                {formError && (
+                                                    <Alert variant="destructive">
+                                                        <AlertCircleIcon className="h-4 w-4" />
+                                                        <AlertTitle>{formError}</AlertTitle>
+                                                    </Alert>
+                                                )}
+                                                {successMessage && (
+                                                    <Alert className=" text-green-800">
+                                                        <AlertTitle>{successMessage}</AlertTitle>
+                                                    </Alert>
+                                                )}
+                                            </FieldGroup>
+                                        </form>
+                                    </div>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>Close</AlertDialogCancel>
+                                        <Button onClick={handleUpdate} disabled={loading}>
+                                            {loading ? "Updating..." : "Update"}
+                                        </Button>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
                             <CardTitle className="flex items-center gap-2 text-xl font-fancy">
                                 <Mail className="h-5 w-5 text-[#0052FF]" />
                                 Contact Information

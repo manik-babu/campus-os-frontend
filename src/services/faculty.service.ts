@@ -50,3 +50,25 @@ export const updateStudentMarks = async (data: IMarkInput[]): Promise<IApiRespon
         }
     }
 }
+export const updateContact = async (email: string, phoneNumber: string): Promise<IApiResponse<null>> => {
+    try {
+
+        return await httpClient.patch<null>("/faculty/update-contact", { email, phoneNumber });
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to update contact information",
+        }
+    }
+}
+export const updateAddress = async (presentAddress: string, permanentAddress: string): Promise<IApiResponse<null>> => {
+    try {
+
+        return await httpClient.patch<null>("/faculty/update-address", { presentAddress, permanentAddress });
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to update address information",
+        }
+    }
+}

@@ -127,3 +127,13 @@ export const getAdminDashboardData = async (): Promise<IApiResponse<IAdminDashbo
         }
     }
 };
+export const updateAdminProfile = async (data: { email: string; phoneNumber: string }): Promise<IApiResponse<null>> => {
+    try {
+        return await httpClient.patch<null>("/admin/profile", data);
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to update admin profile",
+        }
+    }
+}
