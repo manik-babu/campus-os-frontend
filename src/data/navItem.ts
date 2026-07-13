@@ -138,11 +138,6 @@ const studentNavItems: INavSection[] = [
                 title: "My Results",
                 href: "/student/results",
                 icon: "FileText",
-            },
-            {
-                title: "Admit Card",
-                href: "/student/admit-card",
-                icon: "FileText",
             }
         ]
     },
