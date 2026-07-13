@@ -58,7 +58,7 @@ export function Footer() {
                     <div>
                         <h4 className="font-semibold text-white mb-4">Resources</h4>
                         <ul className="space-y-3">
-                            {[['Student Portal', 'erp-login'], ['Careers', 'careers'], ['Support', 'support']].map((link) => (
+                            {[['Student Portal', 'erp-login']].map((link) => (
                                 <li key={link[1]}>
                                     {
                                         link[1] !== 'erp-login' ? (
@@ -84,7 +84,7 @@ export function Footer() {
                         <div className="space-y-3">
                             <span className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
                                 <Phone className="h-4 w-4" />
-                                <span>+880 XX XXXX XXXX</span>
+                                <span>+8801571501672</span>
                             </span>
                             <span className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
                                 <Mail className="h-4 w-4" />
@@ -104,17 +104,6 @@ export function Footer() {
                 {/* Bottom Section */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/60">
                     <p>© {currentYear} Uttara University. All rights reserved.</p>
-                    <div className="flex gap-6">
-                        <Link href="#" className="hover:text-white transition-colors">
-                            Privacy Policy
-                        </Link>
-                        <Link href="#" className="hover:text-white transition-colors">
-                            Terms of Service
-                        </Link>
-                        <Link href="#" className="hover:text-white transition-colors">
-                            Cookie Settings
-                        </Link>
-                    </div>
                 </div>
             </div>
         </footer>

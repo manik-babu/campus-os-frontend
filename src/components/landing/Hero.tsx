@@ -41,7 +41,7 @@ export function Hero({
     });
 
     return (
-        <section className="relative min-h-screen w-full overflow-hidden bg-background pt-32 pb-20 md:pb-32">
+        <section className="relative h-[70vh] w-full overflow-hidden flex justify-center items-center">
             {/* Background Decorative Elements */}
             <div className="absolute inset-0 overflow-hidden">
                 {/* Radial glow - top right */}
@@ -54,12 +54,6 @@ export function Hero({
                 <div className="grid gap-12 lg:grid-cols-2 grid-cols-1 lg:gap-8">
                     {/* Left Content */}
                     <div className="flex flex-col justify-center space-y-8">
-                        {/* Section Label */}
-                        <div className="section-label w-fit hero-text" >
-                            <div className="section-label-dot" />
-                            <span className="section-label-text">Welcome</span>
-                        </div>
-
                         {/* Headline */}
                         <div className="space-y-4">
                             <h1 className="font-fancy leading-tight hero-text text-6xl!">
@@ -95,20 +89,6 @@ export function Hero({
                         {/* Trust Indicators */}
                         <div className="flex flex-col gap-2 pt-8 border-t border-border hero-text">
                             <p className="text-sm text-muted-foreground">Trusted by thousands of students worldwide</p>
-                            <div className="flex items-center gap-4">
-                                <div className="flex gap-1">
-                                    {[...Array(5)].map((_, i) => (
-                                        <svg
-                                            key={i}
-                                            className="h-4 w-4 fill-[#0052FF]"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                        </svg>
-                                    ))}
-                                </div>
-                                <span className="text-sm font-medium text-foreground">4.9/5 Average Rating</span>
-                            </div>
                         </div>
                     </div>
 

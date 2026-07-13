@@ -15,9 +15,9 @@ function StatCard({ number, label, description }: StatCardProps) {
         <div className="flex flex-col items-center gap-3 py-6 md:py-8 relative">
             <div className="text-4xl md:text-5xl font-bold gradient-text">{number}</div>
             <div className="text-center">
-                <p className="font-semibold text-foreground text-sm md:text-base">{label}</p>
+                <p className="font-semibold text-background text-sm md:text-base">{label}</p>
                 {description && (
-                    <p className="text-xs md:text-sm text-muted-foreground mt-1">{description}</p>
+                    <p className="text-xs md:text-sm text-background/70 mt-1">{description}</p>
                 )}
             </div>
         </div>
@@ -76,7 +76,7 @@ export function Stats() {
     });
 
     return (
-        <section className="section-py bg-foreground text-background relative overflow-hidden">
+        <section className="py-24 bg-foreground text-background relative overflow-hidden">
             {/* Dot pattern overlay */}
             <div
                 className="absolute inset-0 opacity-[0.02]"
@@ -94,10 +94,6 @@ export function Stats() {
             <div className="container-landing relative z-10 stats-section">
                 {/* Section Header */}
                 <div className="mb-16 text-center">
-                    <div className="stats-text section-label w-fit mx-auto mb-6 border-background/20 bg-background/10">
-                        <div className="section-label-dot bg-background" />
-                        <span className="text-xs uppercase tracking-[0.15em] text-background/80">By The Numbers</span>
-                    </div>
                     <h2 className="font-fancy stats-text text-background/95">
                         Trusted by thousands of students
                     </h2>
