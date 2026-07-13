@@ -44,6 +44,7 @@ export function Hero({
         <section className="relative h-[70vh] w-full overflow-hidden flex justify-center items-center">
             {/* Background Decorative Elements */}
             <div className="absolute inset-0 overflow-hidden">
+                <Image src="/uu-campus.jpg" alt="Uttara University Campus" fill className="object-cover object-center opacity-20" />
                 {/* Radial glow - top right */}
                 <div className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-linear-to-br from-[#0052FF]/12 to-transparent blur-3xl" />
                 {/* Radial glow - bottom left */}
@@ -93,9 +94,9 @@ export function Hero({
                     </div>
 
                     {/* Right Side - Animated Graphic */}
-                    <div id="hero-graphic" className="hidden lg:flex items-center justify-center">
+                    {/* <div id="hero-graphic" className="hidden lg:flex items-center justify-center">
                         <AnimatedHeroGraphic />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>

@@ -12,6 +12,7 @@ import {
   Field,
   FieldDescription,
   FieldGroup,
+  FieldLabel,
 } from "@/components/ui/field"
 import { useForm } from "@tanstack/react-form"
 import { loginZodSchema } from "@/zod/auth/login"
@@ -25,6 +26,8 @@ import { login } from "@/services/auth.service"
 import { setCookie } from "@/lib/cookieUtils"
 import { useRouter } from "next/navigation"
 import { UserRole } from "@/@types/session"
+import { Button } from "@/components/ui/button"
+import { loginCredentials } from "@/data/credintials"
 
 export function LoginForm({
   className,
@@ -120,6 +123,26 @@ export function LoginForm({
                   <AlertTitle>{formError}</AlertTitle>
                 </Alert>
               }
+
+              <FieldLabel htmlFor={"demo-users"}>Demo users</FieldLabel>
+              <div className="flex gap-2 flex-wrap" id="demo-users">
+                {
+                  loginCredentials.map((user) => (
+                    <Button
+                      type="button"
+                      key={user.idNo}
+                      onClick={() => {
+                        form.setFieldValue("idNo", user.idNo);
+                        form.setFieldValue("password", user.password);
+                      }}
+                    >
+                      {user.name}
+                    </Button>
+                  ))
+                }
+
+              </div>
+
               {/* <Button type="submit">Login</Button> */}
               <LoadingButton
                 isLoading={loading}

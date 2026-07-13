@@ -40,6 +40,7 @@ export default function AppField({
                     type={type === "password" && isPassShowing ? "text" : type}
                     className={cn(className, type === "password" && "pr-10")}
                     disabled={disabled}
+                    value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value)}
                     aria-invalid={isInvalid}
 
