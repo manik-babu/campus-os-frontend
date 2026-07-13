@@ -79,3 +79,19 @@ export const admissionPayment = async (amount: number, admissionFormId: string):
         }
     }
 }
+
+export const sendContactEmail = async (name: string, email: string, message: string): Promise<IApiResponse<null>> => {
+    try {
+        const res = await httpClient.post<null>("/public/contact", {
+            name,
+            email,
+            message
+        });
+        return res;
+    } catch (error: any) {
+        return {
+            ok: false,
+            message: error.message || "Failed to send contact email",
+        }
+    }
+}

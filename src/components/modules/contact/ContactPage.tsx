@@ -1,13 +1,18 @@
 "use client";
 
+import AppField from "@/components/shared/AppField";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Textarea } from "@/components/ui/textarea";
-import { Field, FieldLabel } from "@/components/ui/field";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { FieldGroup } from "@/components/ui/field";
 import { Spinner } from "@/components/ui/spinner";
+import { useForm } from "@tanstack/react-form";
+import { contactZodSchema } from "@/zod/contact/contact";
+import { AlertCircleIcon } from "lucide-react";
+import { sendContactEmail } from "@/services/public.service";
 
 interface ContactInfo {
     icon: React.ReactNode;
@@ -44,32 +49,44 @@ const contactInfo: ContactInfo[] = [
 ];
 
 export default function ContactPage() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: ""
-    });
+    const [formError, setFormError] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
+    const form = useForm({
+        defaultValues: {
+            name: "",
+            email: "",
+            message: "",
+        },
+        validators: {
+            onSubmit: contactZodSchema,
+        },
+        onSubmit: async ({ value }) => {
+            setIsSubmitting(true);
+            setFormError(null);
+            try {
+                const res = await sendContactEmail(value.name, value.email, value.message);
+                if (res.ok) {
+                    toast.success("Message sent to manikbabu.dev@gmail.com. We'll get back to you soon.");
+                    form.reset();
+                }
+                else {
+                    toast.error(res.message || "Failed to send message. Please try again.");
+                }
+            } catch {
+                const message = "Failed to send message. Please try again.";
+                setFormError(message);
+                toast.error(message);
+            } finally {
+                setIsSubmitting(false);
+            }
+        },
+    })
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setIsSubmitting(true);
-
-        try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            toast.success("Message sent successfully! We'll get back to you soon.");
-            setFormData({ name: "", email: "", message: "" });
-        } catch (error) {
-            toast.error("Failed to send message. Please try again.");
-        } finally {
-            setIsSubmitting(false);
-        }
+        e.stopPropagation();
+        form.handleSubmit();
     };
 
     return (
@@ -102,51 +119,58 @@ export default function ContactPage() {
                         <div className="bg-background/10 backdrop-blur-sm rounded-2xl p-8 border border-background/20">
                             <h3 className="text-2xl font-fancy font-semibold text-white mb-6">Send us a Message</h3>
                             <form onSubmit={handleSubmit} className="space-y-4">
-                                <Field>
-                                    <FieldLabel htmlFor={"contact-name"}>Full Name</FieldLabel>
-                                    <Input
-                                        id={"contact-name"}
-                                        placeholder={"Enter your full name"}
-                                        type={"text"}
-                                        className="outline-none border-none"
-                                        required
-                                    />
-                                </Field>
+                                <FieldGroup className="gap-4">
+                                    <form.Field name="name">
+                                        {(field) => (
+                                            <AppField
+                                                field={field}
+                                                label="Full Name"
+                                                placeholder="Enter your full name"
+                                            />
+                                        )}
+                                    </form.Field>
 
-                                <Field>
-                                    <FieldLabel htmlFor={"contact-email"}>Email</FieldLabel>
-                                    <Input
-                                        id={"contact-email"}
-                                        placeholder={"Enter your email address"}
-                                        type={"text"}
-                                        className="outline-none border-none"
-                                        required
-                                    />
-                                </Field>
+                                    <form.Field name="email">
+                                        {(field) => (
+                                            <AppField
+                                                field={field}
+                                                label="Email"
+                                                placeholder="Enter your email address"
+                                                type="email"
+                                            />
+                                        )}
+                                    </form.Field>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-white/80 mb-2">
-                                        Message
-                                    </label>
-                                    <Textarea
-                                        required
-                                        placeholder="Tell us more about your inquiry..."
-                                        rows={3}
-                                        className="w-full px-4 py-3 rounded-lg bg-background/20 border border-background/30 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-background/50 focus:border-transparent resize-none"
-                                    />
-                                </div>
+                                    <form.Field name="message">
+                                        {(field) => (
+                                            <AppField
+                                                field={field}
+                                                label="Message"
+                                                placeholder="Tell us more about your inquiry..."
+                                                multiline
+                                                rows={5}
+                                            />
+                                        )}
+                                    </form.Field>
+                                </FieldGroup>
+
+                                {formError && (
+                                    <Alert variant="destructive">
+                                        <AlertCircleIcon />
+                                        <AlertTitle>{formError}</AlertTitle>
+                                    </Alert>
+                                )}
 
                                 <p className="text-xs text-white/60">
                                     {`We'll`} get back to you within 24 hours
                                 </p>
-                                <button
+                                <Button
                                     type="submit"
                                     className="btn-primary"
+                                    disabled={isSubmitting}
                                 >
-                                    {
-                                        isSubmitting ? <><Spinner /> Sending...</> : "Send Message"
-                                    }
-                                </button>
+                                    {isSubmitting ? <><Spinner /> Sending...</> : "Send Message"}
+                                </Button>
 
                             </form>
                         </div>
